@@ -1,0 +1,52 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<!-- project=> balise racine=>à mettre sans se poser de question -->
+	<!-- version=>4.0.0 -->
+	<modelVersion>4.0.0</modelVersion>
+	<!-- infos du projet -->
+	<!-- 
+		group id de l'application. group id s'apparente au package java mais pour un projet
+	-->
+	<groupId>ajc.formation.soprasteria</groupId>
+	<!-- le nom du projet -->
+	<artifactId>demoMaven</artifactId>
+	<!-- 
+		la version du projet 
+		X.X-SNAPSHOT =>version en cours de developpement	
+	-->
+	<version>1.0</version>
+	<properties>
+		<!-- proprietes standards du projet -->
+		<!-- version du code source -->
+		<maven.compiler.source>15</maven.compiler.source>
+		<!-- version du code genere -->
+		<maven.compiler.target>15</maven.compiler.target>
+		<!-- 
+		l'encodage des fichiers sources du projet. L'encodage des windows et *nix par defaut n'est pas le meme
+	-->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>ajc.formation.soprasteria</groupId>
+			<artifactId>maven1</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.0.2</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<!-- class contenant le main -->
+							<mainClass>demoMaven.App</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
