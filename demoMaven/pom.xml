@@ -28,8 +28,8 @@
 	<dependencies>
 		<dependency>
 			<groupId>ajc.formation.soprasteria</groupId>
-			<artifactId>maven1</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<artifactId>questJdbcMaven</artifactId>
+			<version>1.0</version>
 		</dependency>
 	</dependencies>
 	<build>
