@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE  carnet-adresse  SYSTEM "carnet-adresse.dtd">
+<!-- commentaire -->
+<carnet-adresse>
+	<personne id="p1">
+		<prenom>olivier</prenom>
+		<nom>gozlan</nom>
+		<formateur/>
+	</personne>
+
+</carnet-adresse>

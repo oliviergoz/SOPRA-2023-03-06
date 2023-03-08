@@ -1,0 +1,9 @@
+<!ELEMENT carnet-adresse (personne)+>
+<!ELEMENT personne (prenom,nom,formateur?)>
+<!ELEMENT prenom (#PCDATA)>
+<!ELEMENT nom (#PCDATA)>
+<!ELEMENT formateur  EMPTY>
+
+<!ATTLIST personne id ID #REQUIRED
+								  formateur CDATA  #IMPLIED
+								  poste (formateur|stagiaire) "formateur">

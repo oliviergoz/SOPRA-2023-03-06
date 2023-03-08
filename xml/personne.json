@@ -1,0 +1,16 @@
+{
+  "prenom": "olivier",
+  "nom": "gozlan",
+  "age": 111,
+  "adresse": {
+    "numero": 6,
+    "rue": "rue rougemont",
+    "codePostal": 75009,
+    "ville": "paris"
+  },
+  "competences": [
+    { "matiere": "java" },
+    { "matiere": "uml" },
+    { "matiere": "unix" }
+  ]
+}

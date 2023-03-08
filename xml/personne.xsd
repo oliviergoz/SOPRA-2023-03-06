@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"> 
+
+    <xsd:simpleType name="type_sexe">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="homme"></xsd:enumeration>
+            <xsd:enumeration value="femme"></xsd:enumeration>
+            <xsd:enumeration value="ne veut pas le dire"></xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:element name="nom" type="xsd:string" /> 
+    <xsd:element name="prenom" type="xsd:string" />
+    <xsd:element name="sexe" type="type_sexe"></xsd:element>
+
+    <xsd:element name="personne"> 
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element ref="nom"/>
+              <xsd:element ref="prenom"></xsd:element>
+              <xsd:element ref="sexe"></xsd:element>
+            </xsd:sequence>
+             <!-- Attributs -->
+        </xsd:complexType> 
+    </xsd:element>
+
+    <xsd:element name="carnet-adresse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="personne" minOccurs="1" maxOccurs="unbounded"></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+
+    </xsd:element>
+</xsd:schema>

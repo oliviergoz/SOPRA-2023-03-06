@@ -1,0 +1,13 @@
+<tns:biblio
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:tns="http://www.example.org/biblio"
+    xsi:schemaLocation="
+    http://www.example.org/biblio  biblio.xsd">
+    <tns:livres>
+        <tns:livre>
+            <tns:titre></tns:titre>
+
+        </tns:livre>
+    </tns:livres>
+    <tns:articles></tns:articles>
+</tns:biblio>

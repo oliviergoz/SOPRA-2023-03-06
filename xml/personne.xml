@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<carnet-adresse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="./personne.xsd">
+    <personne>
+        <nom></nom>
+        <prenom></prenom>
+        <sexe>ne veut pas le dire</sexe>
+    </personne>
+    <personne>
+        <nom></nom>
+        <prenom></prenom>
+        <sexe>homme</sexe>
+    </personne>
+</carnet-adresse>
