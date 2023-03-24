@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 @Entity // Produit est un entite=>associe à un table de la base
@@ -17,10 +18,13 @@ public class Produit {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "product_id")
 	private Long id;
-	@Column(name = "label")
+	@Column(name = "label", nullable = false, length = 255)
 	private String libelle;
 	@Column(name = "price")
 	private double prix;
+	@Column(name = "description", columnDefinition = "TEXT")
+	@Lob
+	private String description;
 
 	// obligatoire pour jpa
 	public Produit() {
@@ -38,6 +42,13 @@ public class Produit {
 		this.id = id;
 		this.libelle = libelle;
 		this.prix = prix;
+	}
+
+	public Produit(String libelle, double prix, String description) {
+		super();
+		this.libelle = libelle;
+		this.prix = prix;
+		this.description = description;
 	}
 
 	public Long getId() {
@@ -62,6 +73,14 @@ public class Produit {
 
 	public void setPrix(double prix) {
 		this.prix = prix;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	@Override

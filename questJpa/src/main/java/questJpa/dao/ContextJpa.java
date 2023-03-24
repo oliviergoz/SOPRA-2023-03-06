@@ -1,4 +1,4 @@
-package formationJpa.dao;
+package questJpa.dao;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -6,19 +6,24 @@ import javax.persistence.Persistence;
 public class ContextJpa {
 	private static ContextJpa singleton;
 	private EntityManagerFactory emf;
-	private static DaoProduit daoProduit = new DaoProduitJpaImpl();
-	private static DaoPersonne daoPersonne = new DaoPersonneJpaImpl();
+	private static DaoPersonne daoPersonne=new DaoPersonneJpaImpl();
+	private static DaoFormation daoFormation=new DaoFormationJpaImpl();
+	private static DaoModule daoModule=new DaoModuleJpaImpl();
 
 	public static DaoPersonne getDaoPersonne() {
 		return daoPersonne;
 	}
 
-	public static DaoProduit getDaoProduit() {
-		return daoProduit;
+	public static DaoFormation getDaoFormation() {
+		return daoFormation;
+	}
+
+	public static DaoModule getDaoModule() {
+		return daoModule;
 	}
 
 	private ContextJpa() {
-		emf = Persistence.createEntityManagerFactory("eshop");
+		emf = Persistence.createEntityManagerFactory("quest");
 	}
 
 	public static ContextJpa getInstance() {
