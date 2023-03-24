@@ -6,12 +6,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
-import questJpa.entites.Personne;
+import questJpa.entites.Stagiaire;
 
-public class DaoPersonneJpaImpl implements DaoPersonne {
+public class DaoStagiaireJpaImpl implements DaoStagiaire {
 
 	@Override
-	public Personne save(Personne obj) {
+	public Stagiaire save(Stagiaire obj) {
 		EntityManager em = ContextJpa.getInstance().getEntityManagerFactory().createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
@@ -22,7 +22,7 @@ public class DaoPersonneJpaImpl implements DaoPersonne {
 	}
 
 	@Override
-	public void delete(Personne obj) {
+	public void delete(Stagiaire obj) {
 		EntityManager em = ContextJpa.getInstance().getEntityManagerFactory().createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
@@ -36,26 +36,26 @@ public class DaoPersonneJpaImpl implements DaoPersonne {
 		EntityManager em = ContextJpa.getInstance().getEntityManagerFactory().createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-		em.remove(em.find(Personne.class, key));
+		em.remove(em.find(Stagiaire.class, key));
 		tx.commit();
 		em.close();
 	}
 
 	@Override
-	public Personne findByKey(Long key) {
+	public Stagiaire findByKey(Long key) {
 		EntityManager em = ContextJpa.getInstance().getEntityManagerFactory().createEntityManager();
-		Personne personne = em.find(Personne.class, key);
+		Stagiaire stagiaire = em.find(Stagiaire.class, key);
 		em.close();
-		return personne;
+		return stagiaire;
 	}
 
 	@Override
-	public List<Personne> findAll() {
+	public List<Stagiaire> findAll() {
 		EntityManager em = ContextJpa.getInstance().getEntityManagerFactory().createEntityManager();
-		TypedQuery<Personne> query = em.createQuery("from Personne p", Personne.class);
-		List<Personne> personnes = query.getResultList();
+		TypedQuery<Stagiaire> query = em.createQuery("from Stagiaire f", Stagiaire.class);
+		List<Stagiaire> stagiaires = query.getResultList();
 		em.close();
-		return personnes;
+		return stagiaires;
 	}
 
 }

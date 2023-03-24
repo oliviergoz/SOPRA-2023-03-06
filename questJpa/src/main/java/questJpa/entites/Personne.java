@@ -7,28 +7,27 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
 
-@Entity
-@Table(name="personne")
-public class Personne {
+@MappedSuperclass
+public abstract class Personne {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="personne_id")
 	private Long id;
-	@Column(name="personne_prenom")
 	private String prenom;
-	@Column(name="personne_nom")
 	private String nom;
+	private String mail;
 
 	public Personne() {
 
 	}
 
-	public Personne(String prenom, String nom) {
+	public Personne(String prenom, String nom, String mail) {
 		super();
 		this.prenom = prenom;
 		this.nom = nom;
+		this.mail = mail;
 	}
 
 	public Long getId() {
@@ -53,6 +52,14 @@ public class Personne {
 
 	public void setNom(String nom) {
 		this.nom = nom;
+	}
+
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
 
 	@Override

@@ -1,23 +1,30 @@
 package formationJpa.entities.heritage.deuxTables;
 
+import java.util.List;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import formationJpa.entities.Adresse;
+import formationJpa.entities.Produit;
 
 @Entity
-@Table(name="supplier")
-@AttributeOverride(name="id",column = @Column(name="supplier_id"))
-@AttributeOverride(name="nom",column = @Column(name="supplier_name"))
-@AttributeOverride(name="adresse.numero",column = @Column(name="supplier_number"))
-@AttributeOverride(name="adresse.rue",column = @Column(name="supplier_street"))
-@AttributeOverride(name="adresse.codePostal",column = @Column(name="supplier_zip_code"))
-@AttributeOverride(name="adresse.ville",column = @Column(name="supplier_city"))
+@Table(name = "supplier")
+@AttributeOverride(name = "id", column = @Column(name = "supplier_id"))
+@AttributeOverride(name = "nom", column = @Column(name = "supplier_name"))
+@AttributeOverride(name = "adresse.numero", column = @Column(name = "supplier_number"))
+@AttributeOverride(name = "adresse.rue", column = @Column(name = "supplier_street"))
+@AttributeOverride(name = "adresse.codePostal", column = @Column(name = "supplier_zip_code"))
+@AttributeOverride(name = "adresse.ville", column = @Column(name = "supplier_city"))
 public class Fournisseur extends Personne {
-	@Column(name="supplier_contact",nullable = false)
+	@Column(name = "supplier_contact", nullable = false)
 	private String contact;
+	@Transient
+	private List<Produit> produits;
 
 	public Fournisseur() {
 
@@ -34,6 +41,14 @@ public class Fournisseur extends Personne {
 
 	public void setContact(String contact) {
 		this.contact = contact;
+	}
+
+	public List<Produit> getProduits() {
+		return produits;
+	}
+
+	public void setProduits(List<Produit> produits) {
+		this.produits = produits;
 	}
 
 }

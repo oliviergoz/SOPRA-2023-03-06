@@ -7,11 +7,13 @@ import javax.persistence.Persistence;
 
 import formationJpa.dao.ContextJpa;
 import formationJpa.dao.DaoClient;
+import formationJpa.dao.DaoFournisseur;
 import formationJpa.dao.DaoPersonneUneTable;
 import formationJpa.dao.DaoProduit;
 import formationJpa.entities.Civilite;
 import formationJpa.entities.Produit;
 import formationJpa.entities.heritage.deuxTables.Client;
+import formationJpa.entities.heritage.deuxTables.Fournisseur;
 import formationJpa.entities.heritage.deuxTables.Personne;
 import formationJpa.entities.heritage.uneTable.ClientUneTable;
 import formationJpa.entities.heritage.uneTable.FournisseurUneTable;
@@ -20,8 +22,13 @@ public class AppTest {
 	public static void main(String[] args) {
 
 		DaoProduit daoProduit = ContextJpa.getDaoProduit();
-		DaoPersonneUneTable daoPersonneUneTable = ContextJpa.getDaoPersonneUneTable();
 		DaoClient daoClient = ContextJpa.getDaoClient();
+		DaoFournisseur daoFournisseur = ContextJpa.getDaoFournisseur();
+
+		Fournisseur fournisseur = new Fournisseur("frs1", null, "frs1");
+		fournisseur=daoFournisseur.save(fournisseur);
+		
+		System.out.println(fournisseur.getId());
 
 		Produit tele = new Produit("tele", 1000);
 
@@ -29,26 +36,10 @@ public class AppTest {
 			tele.setDescription(tele.getDescription() + "ljljljk lkj lkj kl ");
 		}
 
+		tele.setFournisseur(fournisseur);
+		System.out.println("------------save tele--------------");
 		tele = daoProduit.save(tele);
 
-		// a faire en dernier une fois!!
-
-//		ClientUneTable client = new ClientUneTable("client1", null, "client1", Civilite.M);
-//		daoPersonneUneTable.save(client);
-//
-//		FournisseurUneTable frs = new FournisseurUneTable("frs1", null, "contact frs1");
-//		daoPersonneUneTable.save(frs);
-//
-//		System.out.println(daoPersonneUneTable.findAll());
-//		
-//		System.out.println(daoPersonneUneTable.findAllClient());
-//		System.out.println(daoPersonneUneTable.findAllFournisseur());
-
-		Client client = new Client("client1", null, "client1", Civilite.MME);
-
-		daoClient.save(client);
-		
-		
 		ContextJpa.destroy();
 	}
 }

@@ -4,11 +4,16 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import formationJpa.entities.heritage.deuxTables.Fournisseur;
 
 @Entity // Produit est un entite=>associe à un table de la base
 @Table(name = "product") // par defaut le nom de la class est utilisé (attention au probleme des
@@ -25,6 +30,13 @@ public class Produit {
 	@Column(name = "description", columnDefinition = "TEXT")
 	@Lob
 	private String description;
+	//1 produit associe a 1 fournisseur=>????ToOne
+	// 1 produit peut etre associe à plusieurs fournisseurs=>????ToMany
+	//1 fournisseur distribue 1 et 1 seul produit =>One?????
+	//1 fournissuer peut distribuer plusieurs produit =>Many????
+	@ManyToOne
+	@JoinColumn(name="product_supplier_id",foreignKey = @ForeignKey(name="product_supplier_id_fk"))
+	private Fournisseur fournisseur;
 
 	// obligatoire pour jpa
 	public Produit() {
@@ -81,6 +93,14 @@ public class Produit {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Fournisseur getFournisseur() {
+		return fournisseur;
+	}
+
+	public void setFournisseur(Fournisseur fournisseur) {
+		this.fournisseur = fournisseur;
 	}
 
 	@Override

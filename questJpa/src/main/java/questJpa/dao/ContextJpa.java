@@ -6,12 +6,23 @@ import javax.persistence.Persistence;
 public class ContextJpa {
 	private static ContextJpa singleton;
 	private EntityManagerFactory emf;
-	private static DaoPersonne daoPersonne=new DaoPersonneJpaImpl();
-	private static DaoFormation daoFormation=new DaoFormationJpaImpl();
-	private static DaoModule daoModule=new DaoModuleJpaImpl();
 
-	public static DaoPersonne getDaoPersonne() {
-		return daoPersonne;
+	private static DaoFormation daoFormation = new DaoFormationJpaImpl();
+	private static DaoModule daoModule = new DaoModuleJpaImpl();
+	private static DaoStagiaire daoStagiaire = new DaoStagiaireJpaImpl();
+	private static DaoFormateur daoFormateur = new DaoFormateurJpaImpl();
+	private static DaoMateriel daoMateriel = new DaoMaterielJpaImpl();
+
+	public static DaoStagiaire getDaoStagiaire() {
+		return daoStagiaire;
+	}
+
+	public static DaoFormateur getDaoFormateur() {
+		return daoFormateur;
+	}
+
+	public static DaoMateriel getDaoMateriel() {
+		return daoMateriel;
 	}
 
 	public static DaoFormation getDaoFormation() {
