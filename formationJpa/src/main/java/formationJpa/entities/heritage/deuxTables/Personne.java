@@ -1,4 +1,4 @@
-package formationJpa.entities;
+package formationJpa.entities.heritage.deuxTables;
 
 import java.util.Objects;
 
@@ -12,48 +12,30 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-@Entity
-@Table(name = "person")
-public class Personne {
+import formationJpa.entities.Adresse;
+
+@MappedSuperclass
+public abstract class Personne {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "person_id")
 	private Long id;
-	@Column(name = "first_name", nullable = false)
-	private String prenom;
-	@Column(name = "last_name", nullable = false)
 	private String nom;
-	@Enumerated(EnumType.STRING)
-	@Column(name = "civility", length = 3)
-	private Civilite civilite;
-	//@Transient //pas de correspondance dans la base
+	// @Transient //pas de correspondance dans la base
 	@Embedded
-	@AttributeOverrides({
-		@AttributeOverride(name = "numero",column = @Column(name="personn_adress_number",length = 50)),
-		@AttributeOverride(name="rue",column = @Column(name="personn_street")),
-		@AttributeOverride(name="codePostal",column = @Column(name="personn_zip_code",length = 20)),
-		@AttributeOverride(name="ville",column = @Column(name="personn_city"))
-	})
 	private Adresse adresse;
 
 	public Personne() {
 
 	}
 
-	public Personne(String prenom, String nom, Civilite civilite) {
+	public Personne(String nom, Adresse adresse) {
 		super();
-		this.prenom = prenom;
 		this.nom = nom;
-		this.civilite = civilite;
-	}
-
-	public Personne(String prenom, String nom) {
-		super();
-		this.prenom = prenom;
-		this.nom = nom;
+		this.adresse = adresse;
 	}
 
 	public Long getId() {
@@ -64,28 +46,12 @@ public class Personne {
 		this.id = id;
 	}
 
-	public String getPrenom() {
-		return prenom;
-	}
-
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
-	}
-
 	public String getNom() {
 		return nom;
 	}
 
 	public void setNom(String nom) {
 		this.nom = nom;
-	}
-
-	public Civilite getCivilite() {
-		return civilite;
-	}
-
-	public void setCivilite(Civilite civilite) {
-		this.civilite = civilite;
 	}
 
 	public Adresse getAdresse() {

@@ -6,17 +6,22 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 import formationJpa.dao.ContextJpa;
-import formationJpa.dao.DaoPersonne;
+import formationJpa.dao.DaoClient;
+import formationJpa.dao.DaoPersonneUneTable;
 import formationJpa.dao.DaoProduit;
 import formationJpa.entities.Civilite;
-import formationJpa.entities.Personne;
 import formationJpa.entities.Produit;
+import formationJpa.entities.heritage.deuxTables.Client;
+import formationJpa.entities.heritage.deuxTables.Personne;
+import formationJpa.entities.heritage.uneTable.ClientUneTable;
+import formationJpa.entities.heritage.uneTable.FournisseurUneTable;
 
 public class AppTest {
 	public static void main(String[] args) {
 
 		DaoProduit daoProduit = ContextJpa.getDaoProduit();
-		DaoPersonne daoPersonne = ContextJpa.getDaoPersonne();
+		DaoPersonneUneTable daoPersonneUneTable = ContextJpa.getDaoPersonneUneTable();
+		DaoClient daoClient = ContextJpa.getDaoClient();
 
 		Produit tele = new Produit("tele", 1000);
 
@@ -28,11 +33,22 @@ public class AppTest {
 
 		// a faire en dernier une fois!!
 
-		Personne personne = new Personne("olivier", "gozlan", Civilite.MME);
-		daoPersonne.save(personne);
+//		ClientUneTable client = new ClientUneTable("client1", null, "client1", Civilite.M);
+//		daoPersonneUneTable.save(client);
+//
+//		FournisseurUneTable frs = new FournisseurUneTable("frs1", null, "contact frs1");
+//		daoPersonneUneTable.save(frs);
+//
+//		System.out.println(daoPersonneUneTable.findAll());
+//		
+//		System.out.println(daoPersonneUneTable.findAllClient());
+//		System.out.println(daoPersonneUneTable.findAllFournisseur());
 
-		System.out.println(daoPersonne.findByKey(1L).getCivilite().getTexte());
+		Client client = new Client("client1", null, "client1", Civilite.MME);
 
+		daoClient.save(client);
+		
+		
 		ContextJpa.destroy();
 	}
 }

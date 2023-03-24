@@ -7,9 +7,19 @@ public class ContextJpa {
 	private static ContextJpa singleton;
 	private EntityManagerFactory emf;
 	private static DaoProduit daoProduit = new DaoProduitJpaImpl();
-	private static DaoPersonne daoPersonne = new DaoPersonneJpaImpl();
+	private static DaoPersonneUneTable daoPersonne = new DaoPersonneUneTableJpaImpl();
+	private static DaoClient daoClient = new DaoClientJpaImpl();
+	private static DaoFournisseur daoFournisseur = new DaoFournisseurJpaImpl();
 
-	public static DaoPersonne getDaoPersonne() {
+	public static DaoClient getDaoClient() {
+		return daoClient;
+	}
+
+	public static DaoFournisseur getDaoFournisseur() {
+		return daoFournisseur;
+	}
+
+	public static DaoPersonneUneTable getDaoPersonneUneTable() {
 		return daoPersonne;
 	}
 

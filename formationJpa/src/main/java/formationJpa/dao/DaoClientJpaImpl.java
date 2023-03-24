@@ -6,12 +6,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
-import formationJpa.entities.Personne;
+import formationJpa.entities.heritage.deuxTables.Client;
 
-public class DaoPersonneJpaImpl implements DaoPersonne {
+public class DaoClientJpaImpl implements DaoClient {
 
 	@Override
-	public Personne save(Personne obj) {
+	public Client save(Client obj) {
 		EntityManager em = ContextJpa.getInstance().getEntityManagerFactory().createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
@@ -22,7 +22,7 @@ public class DaoPersonneJpaImpl implements DaoPersonne {
 	}
 
 	@Override
-	public void delete(Personne obj) {
+	public void delete(Client obj) {
 		EntityManager em = ContextJpa.getInstance().getEntityManagerFactory().createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
@@ -36,26 +36,31 @@ public class DaoPersonneJpaImpl implements DaoPersonne {
 		EntityManager em = ContextJpa.getInstance().getEntityManagerFactory().createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-		em.remove(em.find(Personne.class, key));
+		em.remove(em.find(Client.class, key));
 		tx.commit();
 		em.close();
 	}
 
 	@Override
-	public Personne findByKey(Long key) {
+	public Client findByKey(Long key) {
+		Client client = null;
 		EntityManager em = ContextJpa.getInstance().getEntityManagerFactory().createEntityManager();
-		Personne personne = em.find(Personne.class, key);
+		client = em.find(Client.class, key);
 		em.close();
-		return personne;
+		return client;
 	}
 
 	@Override
-	public List<Personne> findAll() {
+	public List<Client> findAll() {
 		EntityManager em = ContextJpa.getInstance().getEntityManagerFactory().createEntityManager();
-		TypedQuery<Personne> query = em.createQuery("from Personne p", Personne.class);
-		List<Personne> personnes = query.getResultList();
+		// requete JPQL
+		// select instance from Entity instance where ...
+		// TypedQuery<Client> query = em.createQuery("select p from Client p",
+		// Client.class);
+		TypedQuery<Client> query = em.createQuery("from Client p", Client.class);
+		List<Client> clients = query.getResultList();
 		em.close();
-		return personnes;
+		return clients;
 	}
 
 }

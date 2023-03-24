@@ -26,7 +26,7 @@
 			<property name="hibernate.hbm2ddl.auto" value="create" />
 
 			<!-- affichage des requetes sql executee par jpa, ne pas les mettre !!!! -->
-			<property name="hibernate.show_sql" value="false" />
+			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />
 		</properties>
 	</persistence-unit>
