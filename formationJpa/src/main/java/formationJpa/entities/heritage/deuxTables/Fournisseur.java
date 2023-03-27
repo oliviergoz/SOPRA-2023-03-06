@@ -23,7 +23,10 @@ import formationJpa.entities.Produit;
 public class Fournisseur extends Personne {
 	@Column(name = "supplier_contact", nullable = false)
 	private String contact;
-	@Transient
+	@OneToMany(mappedBy = "fournisseur")
+	//on peut utiliser des List ou des Set
+	//si 1 collection=>List
+	//si plusieurs collections=>Set
 	private List<Produit> produits;
 
 	public Fournisseur() {

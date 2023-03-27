@@ -29,7 +29,7 @@ import formationJpa.entities.heritage.uneTable.FournisseurUneTable;
 public class AppTest {
 	public static void main(String[] args) {
 
-		testCommande();
+		//testCommande();
 		testCommandeV2();
 		ContextJpa.destroy();
 	}
@@ -96,18 +96,27 @@ public class AppTest {
 		Client client=new Client("client1", null, "client1", null);
 		client=daoClient.save(client);
 		
+//		Commande commande=new Commande(client);
+//		commande=daoCommande.save(commande);
+//		
+//		AchatAvecClassId achat1=new AchatAvecClassId(commande,tele, 2);
+//		System.out.println("-------------------achat avec idClass------------------");
+//		daoAchat.save(achat1);
+//		daoAchat.save(new AchatAvecClassId(commande, produit2, 10));
+//		System.out.println("------------------select v2-------------------");
+//		AchatAvecClassId achat= daoAchat.findByKey(new AchatClassId(commande, produit2));
+//		System.out.println(achat.getCommande().getNumero());
+//		System.out.println(achat.getProduit().getLibelle());
+//		System.out.println(achat.getQuantite());
 		
 		Commande commande=new Commande(client);
-		commande=daoCommande.save(commande);
+		commande.addProduit(tele,2);
+		commande.addProduit(produit2,5);
+		//...
 		
-		AchatAvecClassId achat1=new AchatAvecClassId(commande,tele, 2);
-		System.out.println("-------------------achat avec idClass------------------");
-		daoAchat.save(achat1);
-		daoAchat.save(new AchatAvecClassId(commande, produit2, 10));
-		System.out.println("------------------select v2-------------------");
-		AchatAvecClassId achat= daoAchat.findByKey(new AchatClassId(commande, produit2));
-		System.out.println(achat.getCommande().getNumero());
-		System.out.println(achat.getProduit().getLibelle());
-		System.out.println(achat.getQuantite());
+		commande=daoCommande.save(commande);  //gere la commande et son contenu (achats)
+		
+		daoCommande.deleteByKey(commande.getNumero());
+		
 	}
 }

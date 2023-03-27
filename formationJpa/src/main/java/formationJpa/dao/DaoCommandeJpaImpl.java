@@ -1,34 +1,43 @@
 package formationJpa.dao;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
 import formationJpa.entities.Commande;
+import formationJpa.entities.classId.AchatAvecClassId;
 
 public class DaoCommandeJpaImpl implements DaoCommande {
 
 	@Override
 	public Commande save(Commande obj) {
+		boolean create = false;
+		Set<AchatAvecClassId> achats = obj.getAchats();
 		EntityManager em = ContextJpa.getInstance().getEntityManagerFactory().createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-		obj = em.merge(obj);
+		if (obj.getNumero() != null) {
+			obj = em.merge(obj);
+		} else {
+			em.persist(obj);
+			create = true;
+		}
 		tx.commit();
+		if (create) {
+			achats.forEach(achat -> {
+				ContextJpa.getDaoAchatIdClass().save(achat);
+			});
+		}
 		em.close();
 		return obj;
 	}
 
 	@Override
 	public void delete(Commande obj) {
-		EntityManager em = ContextJpa.getInstance().getEntityManagerFactory().createEntityManager();
-		EntityTransaction tx = em.getTransaction();
-		tx.begin();
-		em.remove(em.merge(obj));
-		tx.commit();
-		em.close();
+		deleteByKey(obj.getNumero());
 	}
 
 	@Override
@@ -36,6 +45,10 @@ public class DaoCommandeJpaImpl implements DaoCommande {
 		EntityManager em = ContextJpa.getInstance().getEntityManagerFactory().createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
+		Commande commande=em.find(Commande.class, key);
+		commande.getAchats().forEach(achat->{
+			em.remove(em.merge(achat));
+		});
 		em.remove(em.find(Commande.class, key));
 		tx.commit();
 		em.close();

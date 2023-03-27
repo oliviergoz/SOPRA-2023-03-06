@@ -1,14 +1,18 @@
 package formationJpa.entities.heritage.deuxTables;
 
+import java.util.Set;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import formationJpa.entities.Adresse;
 import formationJpa.entities.Civilite;
+import formationJpa.entities.Commande;
 
 @Entity
 @Table(name = "customer")
@@ -24,6 +28,8 @@ public class Client extends Personne {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "customer_civility")
 	private Civilite civilite;
+	@OneToMany(mappedBy = "client")
+	private Set<Commande> commandes;
 
 	public Client() {
 
@@ -49,6 +55,14 @@ public class Client extends Personne {
 
 	public void setCivilite(Civilite civilite) {
 		this.civilite = civilite;
+	}
+
+	public Set<Commande> getCommandes() {
+		return commandes;
+	}
+
+	public void setCommandes(Set<Commande> commandes) {
+		this.commandes = commandes;
 	}
 
 }

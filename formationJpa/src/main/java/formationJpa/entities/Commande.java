@@ -1,7 +1,9 @@
 package formationJpa.entities;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,8 +13,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import formationJpa.entities.classId.AchatAvecClassId;
+import formationJpa.entities.embeddedId.AchatAvecEmbeddedId;
 import formationJpa.entities.heritage.deuxTables.Client;
 
 @Entity
@@ -26,6 +31,37 @@ public class Commande {
 	@ManyToOne
 	@JoinColumn(name="shipping_id_customer",foreignKey = @ForeignKey(name="shipping_id_customer_fk"))
 	private Client client;
+	
+	//avec EmbeddedId
+//	@OneToMany(mappedBy = "key.commande")
+//	private Set<AchatAvecEmbeddedId> achats;
+//	
+//
+//	public Set<AchatAvecEmbeddedId> getAchats() {
+//		return achats;
+//	}
+//
+//	public void setAchats(Set<AchatAvecEmbeddedId> achats) {
+//		this.achats = achats;
+//	}
+
+	
+	//IdClass
+	@OneToMany(mappedBy = "commande")
+	private Set<AchatAvecClassId> achats=new HashSet<>();
+	
+	
+	public Set<AchatAvecClassId> getAchats() {
+		return achats;
+	}
+
+	public void setAchats(Set<AchatAvecClassId> achats) {
+		this.achats = achats;
+	}
+	
+	public void addProduit(Produit produit,int quantite) {
+		achats.add(new AchatAvecClassId(this, produit, quantite));
+	}
 
 	public Commande() {
 
