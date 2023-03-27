@@ -10,9 +10,24 @@ public class ContextJpa {
 	private static DaoPersonneUneTable daoPersonne = new DaoPersonneUneTableJpaImpl();
 	private static DaoClient daoClient = new DaoClientJpaImpl();
 	private static DaoFournisseur daoFournisseur = new DaoFournisseurJpaImpl();
+	private static DaoAchatAvecEmbeddedId daoAchat = new DaoAchatAvecEmbeddedIdJpaImpl();
+	private static DaoCommande daoCommande = new DaoCommandeJpaImpl();
+	private static DaoAchatAvecClassId daoAchatIdClass = new DaoAchatAvecClassIdJpaImpl();
+
+	public static DaoAchatAvecClassId getDaoAchatIdClass() {
+		return daoAchatIdClass;
+	}
+
+	public static DaoCommande getDaoCommande() {
+		return daoCommande;
+	}
 
 	public static DaoClient getDaoClient() {
 		return daoClient;
+	}
+
+	public static DaoAchatAvecEmbeddedId getDaoAchat() {
+		return daoAchat;
 	}
 
 	public static DaoFournisseur getDaoFournisseur() {
