@@ -29,9 +29,44 @@ import formationJpa.entities.heritage.uneTable.FournisseurUneTable;
 public class AppTest {
 	public static void main(String[] args) {
 
-		//testCommande();
-		testCommandeV2();
+		// testCommande();
+		// testCommandeV2();
+		testRequeteProduit();
 		ContextJpa.destroy();
+	}
+
+	private static void testRequeteProduit() {
+		DaoProduit daoProduit = ContextJpa.getDaoProduit();
+		DaoFournisseur daoFournisseur = ContextJpa.getDaoFournisseur();
+
+		Fournisseur fournisseur = new Fournisseur("frs1", null, "frs1");
+		fournisseur = daoFournisseur.save(fournisseur);
+		daoProduit.save(new Produit("tele", 1000, "une tele", fournisseur));
+		daoProduit.save(new Produit("telephone", 500, "un telephone", fournisseur));
+		Produit p = new Produit("neon", 10, "un neon", null);
+		p = daoProduit.save(p);
+
+		Fournisseur f=daoFournisseur.findByKey(1L);
+		System.out.println(f.getProduits());
+		
+//		daoProduit.findByLibelleContaining("tele").forEach(produit -> {
+//			System.out.println(produit.getFournisseur());
+//		});
+
+//		System.out.println(daoProduit.findByFournisseur(fournisseur));
+//
+//		Fournisseur fakeFournisseur = new Fournisseur();
+//		fakeFournisseur.setId(fournisseur.getId());
+//		System.out.println(daoProduit.findByFournisseur(fakeFournisseur));
+//
+//		p.setFournisseur(fakeFournisseur);
+//		p = daoProduit.save(p);
+//		System.out.println(daoProduit.findByFournisseur(fakeFournisseur));
+//
+//		System.out.println(daoProduit.count());
+
+		
+		
 	}
 
 	private static void testCommande() {
@@ -46,33 +81,31 @@ public class AppTest {
 
 		Produit tele = new Produit("tele", 1000);
 
-		
 		tele.setFournisseur(fournisseur);
 		tele = daoProduit.save(tele);
 
 		Produit produit2 = new Produit("produit2", 100);
 		produit2.setFournisseur(fournisseur);
 		produit2 = daoProduit.save(produit2);
-		
-		Client client=new Client("client1", null, "client1", null);
-		client=daoClient.save(client);
-		
-		
-		Commande commande=new Commande(client);
-		commande=daoCommande.save(commande);
-		
-		AchatAvecEmbeddedId achat1=new AchatAvecEmbeddedId(new AchatEmbeddedId(commande,tele), 2);
+
+		Client client = new Client("client1", null, "client1", null);
+		client = daoClient.save(client);
+
+		Commande commande = new Commande(client);
+		commande = daoCommande.save(commande);
+
+		AchatAvecEmbeddedId achat1 = new AchatAvecEmbeddedId(new AchatEmbeddedId(commande, tele), 2);
 		System.out.println("-------------achat avec embedded id--------------------");
 		daoAchat.save(achat1);
 		daoAchat.save(new AchatAvecEmbeddedId(new AchatEmbeddedId(commande, produit2), 10));
 		System.out.println("-------------select v1-----------------");
-		AchatAvecEmbeddedId achat= daoAchat.findByKey(new AchatEmbeddedId(commande, produit2));
+		AchatAvecEmbeddedId achat = daoAchat.findByKey(new AchatEmbeddedId(commande, produit2));
 		System.out.println(achat.getKey().getCommande().getNumero());
 		System.out.println(achat.getKey().getProduit().getLibelle());
 		System.out.println(achat.getQuantite());
 
 	}
-	
+
 	private static void testCommandeV2() {
 		DaoProduit daoProduit = ContextJpa.getDaoProduit();
 		DaoClient daoClient = ContextJpa.getDaoClient();
@@ -85,17 +118,16 @@ public class AppTest {
 
 		Produit tele = new Produit("tele", 1000);
 
-		
 		tele.setFournisseur(fournisseur);
 		tele = daoProduit.save(tele);
 
 		Produit produit2 = new Produit("produit2", 100);
 		produit2.setFournisseur(fournisseur);
 		produit2 = daoProduit.save(produit2);
-		
-		Client client=new Client("client1", null, "client1", null);
-		client=daoClient.save(client);
-		
+
+		Client client = new Client("client1", null, "client1", null);
+		client = daoClient.save(client);
+
 //		Commande commande=new Commande(client);
 //		commande=daoCommande.save(commande);
 //		
@@ -108,15 +140,15 @@ public class AppTest {
 //		System.out.println(achat.getCommande().getNumero());
 //		System.out.println(achat.getProduit().getLibelle());
 //		System.out.println(achat.getQuantite());
-		
-		Commande commande=new Commande(client);
-		commande.addProduit(tele,2);
-		commande.addProduit(produit2,5);
-		//...
-		
-		commande=daoCommande.save(commande);  //gere la commande et son contenu (achats)
-		
+
+		Commande commande = new Commande(client);
+		commande.addProduit(tele, 2);
+		commande.addProduit(produit2, 5);
+		// ...
+
+		commande = daoCommande.save(commande); // gere la commande et son contenu (achats)
+
 		daoCommande.deleteByKey(commande.getNumero());
-		
+
 	}
 }

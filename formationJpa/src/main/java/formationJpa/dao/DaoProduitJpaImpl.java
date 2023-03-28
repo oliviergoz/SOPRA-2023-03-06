@@ -7,6 +7,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
 import formationJpa.entities.Produit;
+import formationJpa.entities.heritage.deuxTables.Fournisseur;
 
 public class DaoProduitJpaImpl implements DaoProduit {
 
@@ -61,6 +62,41 @@ public class DaoProduitJpaImpl implements DaoProduit {
 		List<Produit> produits = query.getResultList();
 		em.close();
 		return produits;
+	}
+
+	public List<Produit> findByLibelle(String libelle) {
+		EntityManager em = ContextJpa.getInstance().getEntityManagerFactory().createEntityManager();
+		TypedQuery<Produit> query = em.createQuery("from Produit p where p.libelle like :param", Produit.class);
+		query.setParameter("param", libelle);
+		List<Produit> produits = query.getResultList();
+		em.close();
+		return produits;
+	}
+
+	public List<Produit> findByLibelleContaining(String libelle) {
+		EntityManager em = ContextJpa.getInstance().getEntityManagerFactory().createEntityManager();
+		TypedQuery<Produit> query = em.createQuery("from Produit p where p.libelle like :libelle", Produit.class);
+		query.setParameter("libelle", "%" + libelle + "%");
+		List<Produit> produits = query.getResultList();
+		em.close();
+		return produits;
+	}
+
+	public List<Produit> findByFournisseur(Fournisseur fournisseur) {
+		EntityManager em = ContextJpa.getInstance().getEntityManagerFactory().createEntityManager();
+		TypedQuery<Produit> query = em.createQuery("from Produit p where p.fournisseur=:fournisseur", Produit.class);
+		query.setParameter("fournisseur", fournisseur);
+		List<Produit> produits = query.getResultList();
+		em.close();
+		return produits;
+	}
+
+	public long count() {
+		EntityManager em = ContextJpa.getInstance().getEntityManagerFactory().createEntityManager();
+		TypedQuery<Long> count = em.createQuery("select count(p) from Produit p", Long.class);
+		long resultat = count.getSingleResult();
+		em.close();
+		return resultat;
 	}
 
 }

@@ -4,6 +4,7 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,7 +36,7 @@ public class Produit {
 	// 1 produit peut etre associe à plusieurs fournisseurs=>????ToMany
 	//1 fournisseur distribue 1 et 1 seul produit =>One?????
 	//1 fournissuer peut distribuer plusieurs produit =>Many????
-	@ManyToOne
+	@ManyToOne//(fetch = FetchType.EAGER) valeur par defaut pour les relations @XXXToOne
 	@JoinColumn(name="product_supplier_id",foreignKey = @ForeignKey(name="product_supplier_id_fk"))
 	private Fournisseur fournisseur;
 
@@ -43,6 +44,18 @@ public class Produit {
 	public Produit() {
 
 	}
+	
+	
+
+	public Produit(String libelle, double prix, String description, Fournisseur fournisseur) {
+		super();
+		this.libelle = libelle;
+		this.prix = prix;
+		this.description = description;
+		this.fournisseur = fournisseur;
+	}
+
+
 
 	public Produit(String libelle, double prix) {
 		super();

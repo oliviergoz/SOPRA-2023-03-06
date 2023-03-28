@@ -9,7 +9,7 @@ import javax.persistence.OneToOne;
 @DiscriminatorValue("video")
 public class VideoProjecteur extends Materiel {
 
-	@Column(name = "video_resolution")
+	@Column(name = "video_resolution") 
 	private String resolution;
 	@OneToOne(mappedBy = "videoProjecteur")
 	private Salle salle;

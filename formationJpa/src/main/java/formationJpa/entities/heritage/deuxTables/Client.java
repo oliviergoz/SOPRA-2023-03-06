@@ -46,7 +46,9 @@ public class Client extends Personne {
 	}
 
 	public void setPrenom(String prenom) {
-		this.prenom = prenom;
+		if (prenom != null) {
+			this.prenom = prenom;
+		}
 	}
 
 	public Civilite getCivilite() {

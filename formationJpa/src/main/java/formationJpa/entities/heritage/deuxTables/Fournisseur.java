@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -23,7 +24,7 @@ import formationJpa.entities.Produit;
 public class Fournisseur extends Personne {
 	@Column(name = "supplier_contact", nullable = false)
 	private String contact;
-	@OneToMany(mappedBy = "fournisseur")
+	@OneToMany(mappedBy = "fournisseur",fetch = FetchType.LAZY)
 	//on peut utiliser des List ou des Set
 	//si 1 collection=>List
 	//si plusieurs collections=>Set

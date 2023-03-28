@@ -34,7 +34,7 @@ public class Formation {
 	@OneToMany(mappedBy = "formation")
 	private Set<ModuleFormation> modules;
 	@ManyToOne
-	@JoinColumn(name="formation_salle_id",foreignKey = @ForeignKey(name="formation_salle_id_fk"))
+	@JoinColumn(name = "formation_salle_id", foreignKey = @ForeignKey(name = "formation_salle_id_fk"))
 	private Salle salle;
 
 	public Formation() {
