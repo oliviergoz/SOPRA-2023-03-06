@@ -1,5 +1,6 @@
 package questJpa.dao;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -54,6 +55,16 @@ public class DaoStagiaireJpaImpl implements DaoStagiaire {
 		EntityManager em = ContextJpa.getInstance().getEntityManagerFactory().createEntityManager();
 		TypedQuery<Stagiaire> query = em.createQuery("from Stagiaire f", Stagiaire.class);
 		List<Stagiaire> stagiaires = query.getResultList();
+		em.close();
+		return stagiaires;
+	}
+	
+	@Override
+	public List<Stagiaire> findLessThan25year() {
+		EntityManager em = ContextJpa.getInstance().getEntityManagerFactory().createEntityManager();
+		TypedQuery<Stagiaire> query = em.createQuery("from Stagiaire s where year(CURRENT_DATE)-year(s.dateNaissance)<25", Stagiaire.class);
+		List<Stagiaire> stagiaires = query.getResultList();
+		
 		em.close();
 		return stagiaires;
 	}
