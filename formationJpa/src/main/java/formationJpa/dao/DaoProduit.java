@@ -13,4 +13,8 @@ public interface DaoProduit extends DaoGeneric<Produit, Long> {
 	public List<Produit> findByFournisseur(Fournisseur fournisseur);
 
 	public long count();
+
+	public void deleteByFournisseur(Fournisseur fournisseur);
+	
+	public void setFournisseurToNullByFournisseur(Fournisseur fournisseur) ;
 }

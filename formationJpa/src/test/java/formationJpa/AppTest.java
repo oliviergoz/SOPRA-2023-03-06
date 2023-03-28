@@ -31,8 +31,8 @@ public class AppTest {
 
 		// testCommande();
 		// testCommandeV2();
-		// testRequeteProduit();
-		testRequeteClient();
+		 testRequeteProduit();
+		//testRequeteClient();
 		ContextJpa.destroy();
 	}
 
@@ -86,12 +86,14 @@ public class AppTest {
 		daoProduit.save(new Produit("telephone", 500, "un telephone", fournisseur));
 		Produit p = new Produit("neon", 10, "un neon", fournisseur);
 		p = daoProduit.save(p);
+		
+		daoFournisseur.delete(fournisseur);
 
-		daoFournisseur.findAllFetchProduits().forEach(f -> {
-			System.out.println(f.getId() + " " + f.getNom());
-			System.out.println(f.getProduits());
-
-		});
+//		daoFournisseur.findAllFetchProduits().forEach(f -> {
+//			System.out.println(f.getId() + " " + f.getNom());
+//			System.out.println(f.getProduits());
+//
+//		});
 
 //		daoProduit.findByLibelleContaining("tele").forEach(produit -> {
 //			System.out.println(produit.getFournisseur());

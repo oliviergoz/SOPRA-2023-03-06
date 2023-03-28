@@ -27,6 +27,10 @@ public class DaoFournisseurJpaImpl implements DaoFournisseur {
 		EntityManager em = ContextJpa.getInstance().getEntityManagerFactory().createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
+		// suppression en cascade
+		// ContextJpa.getDaoProduit().deleteByFournisseur(obj);
+		// on remplace la reference du fournisseur à supprimer
+		ContextJpa.getDaoProduit().setFournisseurToNullByFournisseur(obj);
 		em.remove(em.merge(obj));
 		tx.commit();
 		em.close();
@@ -53,21 +57,23 @@ public class DaoFournisseurJpaImpl implements DaoFournisseur {
 
 	public Fournisseur findByKeyFetchProduits(Long key) {
 		EntityManager em = ContextJpa.getInstance().getEntityManagerFactory().createEntityManager();
-		TypedQuery<Fournisseur> query = em.createQuery("select distinct f from Fournisseur f left join fetch f.produits  where f.id=:key", Fournisseur.class);
+		TypedQuery<Fournisseur> query = em.createQuery(
+				"select distinct f from Fournisseur f left join fetch f.produits  where f.id=:key", Fournisseur.class);
 		query.setParameter("key", key);
-		Fournisseur fournisseur=query.getSingleResult();
+		Fournisseur fournisseur = query.getSingleResult();
 		em.close();
 		return fournisseur;
 	}
-	
+
 	public List<Fournisseur> findAllFetchProduits() {
 		EntityManager em = ContextJpa.getInstance().getEntityManagerFactory().createEntityManager();
-		TypedQuery<Fournisseur> query = em.createQuery("select distinct f from Fournisseur f left join fetch f.produits ", Fournisseur.class);
-		List<Fournisseur> fournisseurs=query.getResultList();
+		TypedQuery<Fournisseur> query = em
+				.createQuery("select distinct f from Fournisseur f left join fetch f.produits ", Fournisseur.class);
+		List<Fournisseur> fournisseurs = query.getResultList();
 		em.close();
 		return fournisseurs;
 	}
-	
+
 	@Override
 	public List<Fournisseur> findAll() {
 		EntityManager em = ContextJpa.getInstance().getEntityManagerFactory().createEntityManager();

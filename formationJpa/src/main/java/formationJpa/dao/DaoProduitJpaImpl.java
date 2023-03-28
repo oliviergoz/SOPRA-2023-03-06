@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import formationJpa.entities.Produit;
@@ -97,6 +98,29 @@ public class DaoProduitJpaImpl implements DaoProduit {
 		long resultat = count.getSingleResult();
 		em.close();
 		return resultat;
+	}
+
+	// update ou delete
+	public void deleteByFournisseur(Fournisseur fournisseur) {
+		EntityManager em = ContextJpa.getInstance().getEntityManagerFactory().createEntityManager();
+		Query query = em.createQuery("delete from Produit p where p.fournisseur=:fournisseur");
+		query.setParameter("fournisseur", fournisseur);
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		query.executeUpdate();
+		tx.commit();
+		em.close();
+	}
+	
+	public void setFournisseurToNullByFournisseur(Fournisseur fournisseur) {
+		EntityManager em = ContextJpa.getInstance().getEntityManagerFactory().createEntityManager();
+		Query query = em.createQuery("update Produit p set p.fournisseur=null where p.fournisseur=:fournisseur");
+		query.setParameter("fournisseur", fournisseur);
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		query.executeUpdate();
+		tx.commit();
+		em.close();
 	}
 
 }
