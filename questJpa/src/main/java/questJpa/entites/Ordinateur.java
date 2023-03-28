@@ -5,16 +5,19 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.OneToOne;
 
 @Entity
 @DiscriminatorValue("pc")
 public class Ordinateur extends Materiel {
 
-	@Column(name="ordinateur_processeur",length = 3)
+	@Column(name = "ordinateur_processeur", length = 3)
 	@Enumerated(EnumType.STRING)
 	private Processeur processeur;
 	@Column(name = "ordinateur_ram", length = 10)
 	private String ram;
+	@OneToOne(mappedBy = "ordinateur")
+	private Stagiaire stagiaire;
 
 	public Ordinateur() {
 
@@ -40,6 +43,14 @@ public class Ordinateur extends Materiel {
 
 	public void setRam(String ram) {
 		this.ram = ram;
+	}
+
+	public Stagiaire getStagiaire() {
+		return stagiaire;
+	}
+
+	public void setStagiaire(Stagiaire stagiaire) {
+		this.stagiaire = stagiaire;
 	}
 
 }

@@ -1,8 +1,11 @@
 package questJpa.entites;
 
+import java.util.Set;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -14,6 +17,10 @@ import javax.persistence.Table;
 public class Formateur extends Personne {
 	@Column(name = "formateur_interne")
 	private boolean interne;
+	@OneToMany(mappedBy = "referent")
+	private Set<Formation> formationsEnTantQueReferent;
+	@OneToMany(mappedBy = "animateur")
+	private Set<ModuleFormation> modulesAnimes;
 
 	public Formateur() {
 
@@ -30,6 +37,22 @@ public class Formateur extends Personne {
 
 	public void setInterne(boolean interne) {
 		this.interne = interne;
+	}
+
+	public Set<Formation> getFormationsEnTantQueReferent() {
+		return formationsEnTantQueReferent;
+	}
+
+	public void setFormationsEnTantQueReferent(Set<Formation> formationsEnTantQueReferent) {
+		this.formationsEnTantQueReferent = formationsEnTantQueReferent;
+	}
+
+	public Set<ModuleFormation> getModulesAnimes() {
+		return modulesAnimes;
+	}
+
+	public void setModulesAnimes(Set<ModuleFormation> modulesAnimes) {
+		this.modulesAnimes = modulesAnimes;
 	}
 
 }

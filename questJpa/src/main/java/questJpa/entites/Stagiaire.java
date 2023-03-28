@@ -7,6 +7,10 @@ import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -25,6 +29,12 @@ public class Stagiaire extends Personne {
 			@AttributeOverride(name = "codePostal", column = @Column(name = "stagiaire_cp", length = 50)),
 			@AttributeOverride(name = "ville", column = @Column(name = "stagiaire_ville")) })
 	private Adresse adresse;
+	@ManyToOne
+	@JoinColumn(name = "stagiaire_formation_id", foreignKey = @ForeignKey(name = "stagiaire_formation_id_fk"))
+	private Formation formation;
+	@OneToOne
+	@JoinColumn(name = "stagiaire_pc_id", foreignKey = @ForeignKey(name = "stagiaire_pc_id_fk"))
+	private Ordinateur ordinateur;
 
 	public Stagiaire() {
 
@@ -34,6 +44,14 @@ public class Stagiaire extends Personne {
 		super(prenom, nom, mail);
 		this.dateNaissance = dateNaissance;
 		this.adresse = adresse;
+	}
+
+	public Stagiaire(String prenom, String nom, String mail, LocalDate dateNaissance, Adresse adresse,
+			Formation formation) {
+		super(prenom, nom, mail);
+		this.dateNaissance = dateNaissance;
+		this.adresse = adresse;
+		this.formation = formation;
 	}
 
 	public LocalDate getDateNaissance() {
@@ -50,6 +68,22 @@ public class Stagiaire extends Personne {
 
 	public void setAdresse(Adresse adresse) {
 		this.adresse = adresse;
+	}
+
+	public Formation getFormation() {
+		return formation;
+	}
+
+	public void setFormation(Formation formation) {
+		this.formation = formation;
+	}
+
+	public Ordinateur getOrdinateur() {
+		return ordinateur;
+	}
+
+	public void setOrdinateur(Ordinateur ordinateur) {
+		this.ordinateur = ordinateur;
 	}
 
 }
