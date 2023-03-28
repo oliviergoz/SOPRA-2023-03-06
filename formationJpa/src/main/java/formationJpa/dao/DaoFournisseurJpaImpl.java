@@ -51,6 +51,23 @@ public class DaoFournisseurJpaImpl implements DaoFournisseur {
 		return fournisseur;
 	}
 
+	public Fournisseur findByKeyFetchProduits(Long key) {
+		EntityManager em = ContextJpa.getInstance().getEntityManagerFactory().createEntityManager();
+		TypedQuery<Fournisseur> query = em.createQuery("select distinct f from Fournisseur f left join fetch f.produits  where f.id=:key", Fournisseur.class);
+		query.setParameter("key", key);
+		Fournisseur fournisseur=query.getSingleResult();
+		em.close();
+		return fournisseur;
+	}
+	
+	public List<Fournisseur> findAllFetchProduits() {
+		EntityManager em = ContextJpa.getInstance().getEntityManagerFactory().createEntityManager();
+		TypedQuery<Fournisseur> query = em.createQuery("select distinct f from Fournisseur f left join fetch f.produits ", Fournisseur.class);
+		List<Fournisseur> fournisseurs=query.getResultList();
+		em.close();
+		return fournisseurs;
+	}
+	
 	@Override
 	public List<Fournisseur> findAll() {
 		EntityManager em = ContextJpa.getInstance().getEntityManagerFactory().createEntityManager();

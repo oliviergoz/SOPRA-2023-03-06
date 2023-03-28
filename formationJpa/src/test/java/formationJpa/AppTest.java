@@ -31,8 +31,46 @@ public class AppTest {
 
 		// testCommande();
 		// testCommandeV2();
-		testRequeteProduit();
+		// testRequeteProduit();
+		testRequeteClient();
 		ContextJpa.destroy();
+	}
+
+	private static void testRequeteClient() {
+		DaoProduit daoProduit = ContextJpa.getDaoProduit();
+		DaoClient daoClient = ContextJpa.getDaoClient();
+		DaoFournisseur daoFournisseur = ContextJpa.getDaoFournisseur();
+		DaoCommande daoCommande = ContextJpa.getDaoCommande();
+		DaoAchatAvecClassId daoAchat = ContextJpa.getDaoAchatIdClass();
+
+		Fournisseur fournisseur = new Fournisseur("frs1", null, "frs1");
+		fournisseur = daoFournisseur.save(fournisseur);
+
+		Produit tele = new Produit("tele", 1000);
+
+		tele.setFournisseur(fournisseur);
+		tele = daoProduit.save(tele);
+
+		Produit produit2 = new Produit("produit2", 100);
+		produit2.setFournisseur(fournisseur);
+		produit2 = daoProduit.save(produit2);
+
+		Client client = new Client("client1", null, "client1", null);
+		client = daoClient.save(client);
+
+		Commande commande = new Commande(client);
+		commande.addProduit(tele, 2);
+		commande.addProduit(produit2, 5);
+		// ...
+
+		commande = daoCommande.save(commande);
+
+		client = daoClient.findByIdfetchCommandefetchAchats(100L);
+		System.out.println(client);
+//		System.out.println(client.getCommandes());
+//		client.getCommandes().forEach(c -> {
+//			System.out.println(c.getAchats());
+//		});
 	}
 
 	private static void testRequeteProduit() {
@@ -41,14 +79,20 @@ public class AppTest {
 
 		Fournisseur fournisseur = new Fournisseur("frs1", null, "frs1");
 		fournisseur = daoFournisseur.save(fournisseur);
+
+		Fournisseur amazon = new Fournisseur("amazon", null, "amazon");
+		amazon = daoFournisseur.save(amazon);
 		daoProduit.save(new Produit("tele", 1000, "une tele", fournisseur));
 		daoProduit.save(new Produit("telephone", 500, "un telephone", fournisseur));
-		Produit p = new Produit("neon", 10, "un neon", null);
+		Produit p = new Produit("neon", 10, "un neon", fournisseur);
 		p = daoProduit.save(p);
 
-		Fournisseur f=daoFournisseur.findByKey(1L);
-		System.out.println(f.getProduits());
-		
+		daoFournisseur.findAllFetchProduits().forEach(f -> {
+			System.out.println(f.getId() + " " + f.getNom());
+			System.out.println(f.getProduits());
+
+		});
+
 //		daoProduit.findByLibelleContaining("tele").forEach(produit -> {
 //			System.out.println(produit.getFournisseur());
 //		});
@@ -65,8 +109,6 @@ public class AppTest {
 //
 //		System.out.println(daoProduit.count());
 
-		
-		
 	}
 
 	private static void testCommande() {

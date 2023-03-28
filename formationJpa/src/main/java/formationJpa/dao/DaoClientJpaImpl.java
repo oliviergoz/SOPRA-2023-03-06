@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
 import formationJpa.entities.heritage.deuxTables.Client;
@@ -61,6 +62,23 @@ public class DaoClientJpaImpl implements DaoClient {
 		List<Client> clients = query.getResultList();
 		em.close();
 		return clients;
+	}
+
+	// pas propre
+	public Client findByIdfetchCommandefetchAchats(Long id) {
+		EntityManager em = ContextJpa.getInstance().getEntityManagerFactory().createEntityManager();
+		TypedQuery<Client> query = em.createQuery(
+				"select distinct c from Client c left join fetch c.commandes cmd left join fetch cmd.achats where c.id=:id",
+				Client.class);
+		query.setParameter("id", id);
+		Client client = null;
+		try {
+			client = query.getSingleResult();
+		} catch (NoResultException ex) {
+
+		}
+		em.close();
+		return client;
 	}
 
 }

@@ -33,6 +33,7 @@ public class Formation {
 	private Set<Stagiaire> participants;
 	@OneToMany(mappedBy = "formation")
 	private Set<ModuleFormation> modules;
+	//"select distinct f from Formation f left join fetch f.participants left join fetch f.modules where f.id=:id"
 	@ManyToOne
 	@JoinColumn(name = "formation_salle_id", foreignKey = @ForeignKey(name = "formation_salle_id_fk"))
 	private Salle salle;
