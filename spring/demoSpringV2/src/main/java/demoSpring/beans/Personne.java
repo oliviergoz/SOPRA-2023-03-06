@@ -1,7 +1,14 @@
 package demoSpring.beans;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
+@Component("fiona")
 public class Personne implements IPersonne {
 	private String prenom;
+	@Autowired
+	@Qualifier("yamaha")
 	private Vehicule vehicule;
 
 	public Personne() {

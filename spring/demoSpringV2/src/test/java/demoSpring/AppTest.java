@@ -3,6 +3,7 @@ package demoSpring;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import demoSpring.beans.IPersonne;
+import demoSpring.beans.Vehicule;
 
 public class AppTest {
 	public static void main(String[] args) {
@@ -21,6 +22,12 @@ public class AppTest {
 		System.out.println(olivier.getPrenom());
 		IPersonne jeanne = ctx.getBean("jeanne", IPersonne.class);
 		jeanne.getVehicule().infos();
+
+		System.out.println("----------------");
+		ctx.getBean("voiture", Vehicule.class).infos();
+		
+		System.out.println(ctx.getBean("fiona", IPersonne.class));
+		
 		// arret de spring
 		ctx.close();
 

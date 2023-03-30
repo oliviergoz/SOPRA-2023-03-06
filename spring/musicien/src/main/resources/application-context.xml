@@ -7,17 +7,10 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<bean id="olivier" class="demoSpring.beans.Personne">
-		<property name="prenom" value="olivier"></property>
+	<bean id="guitare" class="musicien.Guitare">
+
 	</bean>
-	
-	<bean id="jeanne" class="demoSpring.beans.Personne">
-		<property name="prenom" value="jeanne"></property>
-		<property name="vehicule" ref="c3"></property>
-	</bean>
-	
-	<bean id="c3" class="demoSpring.beans.Voiture"></bean>
-	<bean id="yamaha" class="demoSpring.beans.Moto"></bean>
+
 </beans>
 
 
