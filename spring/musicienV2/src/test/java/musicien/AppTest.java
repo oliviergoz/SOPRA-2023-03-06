@@ -10,7 +10,7 @@ import musicien.config.AppConfig;
 public class AppTest {
 	public static void main(String[] args) {
 		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
-		ctx.getBean("pianiste", Musicien.class).performer();
+		ctx.getBean("guitariste", Musicien.class).performer();
 		ctx.close();
 	}
 }
