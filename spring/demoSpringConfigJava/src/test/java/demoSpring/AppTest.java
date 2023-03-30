@@ -12,11 +12,12 @@ public class AppTest {
 	public static void main(String[] args) {
 		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(SpringConfig.class);
 
-		System.out.println(ctx.getBean("fiona", IPersonne.class));
-		System.out.println(ctx.getBean("fiona", IPersonne.class).getVehicule());
-		IPersonne olivier = ctx.getBean("olivier", IPersonne.class);
-		System.out.println(olivier);
-		System.out.println(olivier.getVehicule());
+		IPersonne p = ctx.getBean("fiona", IPersonne.class);
+		p.demoAspect();
+		p.setPrenom("fiona");
+		p.getPrenom();
+		p.setPrenom("ddddd");
+		p.getPrenom();
 		// arret de spring
 		ctx.close();
 

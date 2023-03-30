@@ -31,4 +31,10 @@ public class Personne implements IPersonne {
 		this.vehicule = vehicule;
 	}
 
+	@Override
+	public void demoAspect() {
+		System.out.println("demoAspect de personne");
+		//throw new IllegalArgumentException();
+	}
+
 }

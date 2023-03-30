@@ -8,4 +8,6 @@ public interface IPersonne {
 	public Vehicule getVehicule();
 
 	public void setVehicule(Vehicule vehicule);
+
+	public void demoAspect();
 }
