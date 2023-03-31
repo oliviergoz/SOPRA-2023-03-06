@@ -22,6 +22,15 @@ public class Spectateur {
 	public void performerG() {
 
 	}
+	
+	
+	private void telephoneOff() {
+		System.out.println("couper telephone");
+	}
+	
+	private void sasseoir() {
+		System.out.println("s'asseoir");
+	}
 
 	@Pointcut("execution(* musicien.beans.Pianiste.performer())")
 	public void performerP() {
@@ -36,6 +45,8 @@ public class Spectateur {
 	@Before("performerG()")
 	public void installation() {
 		System.out.println("les spectateurs s'installent");
+		telephoneOff();
+		sasseoir();
 	}
 
 	@After("performerG()")
