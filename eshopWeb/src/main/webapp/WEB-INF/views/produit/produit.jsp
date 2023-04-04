@@ -3,8 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<base href="${pageContext.request.contextPath}/">
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 <title>eshop</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
@@ -15,20 +14,12 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
 	crossorigin="anonymous"></script>
+<base href="${pageContext.request.contextPath}/">
 </head>
 <body>
 	<div class="container">
-		${pageContext.request.contextPath}/
-		<h1>hello world!!!!</h1>
-		<jsp:include page="menu.jsp"></jsp:include>
-
-		<div>
-			<form action="param" method="get">
-				prenom:<input type="text" name="prenom">age:<input
-					type="number" name="age">
-				<button type="submit">envoyer</button>
-			</form>
-		</div>
+		<h1>la page des produits</h1>
+		<jsp:include page="../menu.jsp"></jsp:include>
 	</div>
 </body>
 </html>
