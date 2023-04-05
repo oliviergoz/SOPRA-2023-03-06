@@ -1,6 +1,10 @@
 package eshop.services;
 
 import java.util.List;
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +16,9 @@ import eshop.repositories.ProduitRepository;
 //tous les traitements que je veux fournir pour les produits
 @Service
 public class ProduitService {
+
+	@Autowired
+	private Validator validator;
 
 	@Autowired
 	private ProduitRepository produitRepo;
@@ -39,12 +46,18 @@ public class ProduitService {
 
 	// creation et mise a ensemble ou pas???
 	public void createOrUpdate(Produit produit) {
-		if (produit.getLibelle() == null || produit.getLibelle().isBlank()) {
-			throw new ProduitException("libelle obligatoire");
+//		if (produit.getLibelle() == null || produit.getLibelle().isBlank()) {
+//			throw new ProduitException("libelle obligatoire");
+//		}
+//		if (produit.getPrix() <= 0) {
+//			throw new ProduitException("probleme prix");
+//		}
+
+		Set<ConstraintViolation<Produit>> violations = validator.validate(produit);
+		if (!violations.isEmpty()) {
+			throw new ProduitException();
 		}
-		if (produit.getPrix() <= 0) {
-			throw new ProduitException("probleme prix");
-		}
+
 		produitRepo.save(produit);
 	}
 

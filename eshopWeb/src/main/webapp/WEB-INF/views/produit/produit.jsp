@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,6 +21,35 @@
 	<div class="container">
 		<h1>la page des produits</h1>
 		<jsp:include page="../menu.jsp"></jsp:include>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>id</th>
+					<th>libelle</th>
+					<th>description</th>
+					<th>prix</th>
+					<th>fournisseur</th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="p" items="${produits}">
+					<tr>
+						<td>${p.id }</td>
+						<td>${p.libelle }</td>
+						<td>${p.description }</td>
+						<td>${p.prix }</td>
+						<td>${p.fournisseur.nom}</td>
+						<td><a href="produit/edit?id=${p.id}"
+							class="btn btn-outline-primary">edition</a></td>
+						<td><a href="produit/delete?id=${p.id}"
+							class="btn btn-outline-danger">supprimer</a></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+		<a href="produit/add" class="btn btn-link">nouveau produit</a>
 	</div>
 </body>
 </html>

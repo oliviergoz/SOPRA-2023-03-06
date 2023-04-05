@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotBlank;
 
 @Entity // Produit est un entite=>associe à un table de la base
 @Table(name = "product") // par defaut le nom de la class est utilisé (attention au probleme des
@@ -21,27 +23,27 @@ public class Produit {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "product_id")
 	private Long id;
+	@NotBlank(message = "il faut un libelle")
 	@Column(name = "label", nullable = false, length = 255)
 	private String libelle;
+	@DecimalMin(value = "0.1")
 	@Column(name = "price")
 	private double prix;
 	@Column(name = "description", columnDefinition = "TEXT")
 	@Lob
 	private String description;
-	//1 produit associe a 1 fournisseur=>????ToOne
+	// 1 produit associe a 1 fournisseur=>????ToOne
 	// 1 produit peut etre associe à plusieurs fournisseurs=>????ToMany
-	//1 fournisseur distribue 1 et 1 seul produit =>One?????
-	//1 fournissuer peut distribuer plusieurs produit =>Many????
-	@ManyToOne//(fetch = FetchType.EAGER) valeur par defaut pour les relations @XXXToOne
-	@JoinColumn(name="product_supplier_id",foreignKey = @ForeignKey(name="product_supplier_id_fk"))
+	// 1 fournisseur distribue 1 et 1 seul produit =>One?????
+	// 1 fournissuer peut distribuer plusieurs produit =>Many????
+	@ManyToOne // (fetch = FetchType.EAGER) valeur par defaut pour les relations @XXXToOne
+	@JoinColumn(name = "product_supplier_id", foreignKey = @ForeignKey(name = "product_supplier_id_fk"))
 	private Fournisseur fournisseur;
 
 	// obligatoire pour jpa
 	public Produit() {
 
 	}
-	
-	
 
 	public Produit(String libelle, double prix, String description, Fournisseur fournisseur) {
 		super();
@@ -50,8 +52,6 @@ public class Produit {
 		this.description = description;
 		this.fournisseur = fournisseur;
 	}
-
-
 
 	public Produit(String libelle, double prix) {
 		super();
