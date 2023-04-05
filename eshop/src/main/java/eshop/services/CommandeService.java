@@ -44,7 +44,7 @@ public class CommandeService {
 		return commandeRepository.findById(numero).orElseThrow(CommandeException::new);
 	}
 
-	public List<Commande> byClient(Client client) {
+	public List<Commande> getByClient(Client client) {
 		return commandeRepository.findByClient(client);
 	}
 
