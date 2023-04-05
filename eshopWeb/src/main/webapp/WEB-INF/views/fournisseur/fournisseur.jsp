@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,6 +21,34 @@
 	<div class="container">
 		<h1>la page des fournisseurs</h1>
 		<jsp:include page="../menu.jsp"></jsp:include>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>id</th>
+					<th>nom</th>
+					<th>contact</th>
+					<th>adresse</th>
+					<th></th>
+					<th></th>
+			</thead>
+			<tbody>
+				<c:forEach var="f" items="${fournisseurs}">
+					<tr>
+						<td>${f.id}</td>
+						<td>${f.nom}</td>
+						<td>${f.contact}</td>
+						<td>${f.adresse.numero}${f.adresse.rue }<br>
+							${f.adresse.codePostal} ${f.adresse.ville}
+						</td>
+						<td><a href="fournisseur/edit?id=${f.id}" class="btn btn-outline-primary">edition</a></td>
+						<td><a href="fournisseur/delete?id=${f.id}"
+							class="btn btn-outline-danger">suppression</a></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+		<a href="fournisseur/create" class="btn btn-link">nouveau
+			fournisseur</a>
 	</div>
 </body>
 </html>
