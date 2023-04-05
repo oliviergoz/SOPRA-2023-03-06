@@ -17,18 +17,18 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="shipping")
+@Table(name = "shipping")
 public class Commande {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long numero;
-	@Column(name="shipping_date")
+	@Column(name = "shipping_date")
 	private LocalDate date;
 	@ManyToOne
-	@JoinColumn(name="shipping_id_customer",foreignKey = @ForeignKey(name="shipping_id_customer_fk"))
+	@JoinColumn(name = "shipping_id_customer", foreignKey = @ForeignKey(name = "shipping_id_customer_fk"))
 	private Client client;
-	
-	//avec EmbeddedId
+
+	// avec EmbeddedId
 //	@OneToMany(mappedBy = "key.commande")
 //	private Set<AchatAvecEmbeddedId> achats;
 //	
@@ -41,12 +41,10 @@ public class Commande {
 //		this.achats = achats;
 //	}
 
-	
-	//IdClass
+	// IdClass
 	@OneToMany(mappedBy = "commande")
-	private Set<Achat> achats=new HashSet<>();
-	
-	
+	private Set<Achat> achats = new HashSet<>();
+
 	public Set<Achat> getAchats() {
 		return achats;
 	}
@@ -54,8 +52,8 @@ public class Commande {
 	public void setAchats(Set<Achat> achats) {
 		this.achats = achats;
 	}
-	
-	public void addProduit(Produit produit,int quantite) {
+
+	public void addProduit(Produit produit, int quantite) {
 		achats.add(new Achat(this, produit, quantite));
 	}
 

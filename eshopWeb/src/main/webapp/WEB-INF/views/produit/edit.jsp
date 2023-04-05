@@ -44,7 +44,9 @@
 					<form:label path="prix">prix:</form:label>
 					<form:input type="number" path="prix" step="0.1"
 						class="form-control" />
-					<form:errors path="prix"></form:errors>
+					<form:errors path="prix">
+					
+					</form:errors>
 				</div>
 				<div class="form-group">
 					<form:label path="fournisseur.id">fournisseur:</form:label>

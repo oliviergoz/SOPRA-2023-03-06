@@ -50,4 +50,10 @@ class ProduitServiceSpringTest {
 		assertThrows(ProduitException.class, () -> produitService.getById(9999L));
 	}
 
+	@Test
+	void contraintsProduit() {
+		Produit p = new Produit();
+		assertThrows(ProduitException.class, () -> produitService.createOrUpdate(p));
+	}
+
 }
