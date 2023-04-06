@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import eshop.entities.Client;
 import eshop.entities.Commande;
-import eshop.entities.Produit;
 import eshop.exceptions.CommandeException;
 import eshop.repositories.AchatRepository;
 import eshop.repositories.CommandeRepository;
@@ -29,6 +28,7 @@ public class CommandeService {
 		Set<ConstraintViolation<Commande>> violations = validator.validate(commande);
 		if (violations.isEmpty()) {
 			commandeRepository.save(commande);
+
 			achatRepository.saveAll(commande.getAchats());
 			return commande;
 		} else {

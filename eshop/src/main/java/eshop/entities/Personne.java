@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotBlank;
 
 import eshop.entities.Adresse;
 
@@ -23,6 +24,7 @@ public abstract class Personne {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@NotBlank
 	private String nom;
 	// @Transient //pas de correspondance dans la base
 	@Embedded

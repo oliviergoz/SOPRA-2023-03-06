@@ -6,39 +6,40 @@ import java.util.Objects;
 import eshop.entities.Commande;
 import eshop.entities.Produit;
 
-public class AchatKey implements Serializable{
-	private Commande commande;
-	private Produit produit;
+public class AchatKey implements Serializable {
+
+	private Long numero;
+	private Long id;
 
 	public AchatKey() {
 
 	}
 
-	public AchatKey(Commande commande, Produit produit) {
+	public AchatKey(Long numero, Long id) {
 		super();
-		this.commande = commande;
-		this.produit = produit;
+		this.numero = numero;
+		this.id = id;
 	}
 
-	public Commande getCommande() {
-		return commande;
+	public Long getNumero() {
+		return numero;
 	}
 
-	public void setCommande(Commande commande) {
-		this.commande = commande;
+	public void setNumero(Long numero) {
+		this.numero = numero;
 	}
 
-	public Produit getProduit() {
-		return produit;
+	public Long getId() {
+		return id;
 	}
 
-	public void setProduit(Produit produit) {
-		this.produit = produit;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(commande, produit);
+		return Objects.hash(id, numero);
 	}
 
 	@Override
@@ -50,7 +51,7 @@ public class AchatKey implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		AchatKey other = (AchatKey) obj;
-		return Objects.equals(commande, other.commande) && Objects.equals(produit, other.produit);
+		return Objects.equals(id, other.id) && Objects.equals(numero, other.numero);
 	}
 
 }

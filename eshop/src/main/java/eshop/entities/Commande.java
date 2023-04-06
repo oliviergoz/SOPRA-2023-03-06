@@ -11,6 +11,7 @@ import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -18,6 +19,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "shipping")
+
 public class Commande {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,7 +44,7 @@ public class Commande {
 //	}
 
 	// IdClass
-	@OneToMany(mappedBy = "commande")
+	@OneToMany(mappedBy = "id.commande")
 	private Set<Achat> achats = new HashSet<>();
 
 	public Set<Achat> getAchats() {
@@ -51,10 +53,6 @@ public class Commande {
 
 	public void setAchats(Set<Achat> achats) {
 		this.achats = achats;
-	}
-
-	public void addProduit(Produit produit, int quantite) {
-		achats.add(new Achat(this, produit, quantite));
 	}
 
 	public Commande() {

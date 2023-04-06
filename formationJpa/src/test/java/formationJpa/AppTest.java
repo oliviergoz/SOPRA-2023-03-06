@@ -31,8 +31,8 @@ public class AppTest {
 
 		// testCommande();
 		// testCommandeV2();
-		 testRequeteProduit();
-		//testRequeteClient();
+		//testRequeteProduit();
+		testRequeteClient();
 		ContextJpa.destroy();
 	}
 

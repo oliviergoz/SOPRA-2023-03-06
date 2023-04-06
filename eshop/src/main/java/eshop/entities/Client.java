@@ -9,6 +9,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import eshop.entities.Adresse;
 import eshop.entities.Civilite;
@@ -24,6 +25,7 @@ import eshop.entities.Commande;
 @AttributeOverride(name = "adresse.ville", column = @Column(name = "customer_city"))
 public class Client extends Personne {
 	@Column(name = "customer_first_name", nullable = false)
+	@NotBlank
 	private String prenom;
 	@Enumerated(EnumType.STRING)
 	@Column(name = "customer_civility")

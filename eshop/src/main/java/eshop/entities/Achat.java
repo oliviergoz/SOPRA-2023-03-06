@@ -3,6 +3,7 @@ package eshop.entities;
 import java.util.Objects;
 
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
 import javax.persistence.Id;
@@ -16,44 +17,31 @@ import eshop.entities.Produit;
 
 @Entity
 @Table(name = "purchase_v2")
-@IdClass(AchatKey.class)
+
 public class Achat {
-	@Id
-	@ManyToOne
-	@JoinColumn(name = "purchase_v2_shipping_id", foreignKey = @ForeignKey(name = "purchase_v2_shipping_id_fk"))
-	private Commande commande;
-	@Id
-	@ManyToOne
-	@JoinColumn(name = "purchase_v2_product_id", foreignKey = @ForeignKey(name = "purchase_v2_product_id_fk"))
-	private Produit produit;
-	@Column(name="quantity")
+
+	@EmbeddedId
+	private AchatId id;
+
+	@Column(name = "quantity")
 	private int quantite;
 
 	public Achat() {
 
 	}
 
-	public Achat(Commande commande, Produit produit, int quantite) {
+	public Achat(AchatId id, int quantite) {
 		super();
-		this.commande = commande;
-		this.produit = produit;
+		this.id = id;
 		this.quantite = quantite;
 	}
 
-	public Commande getCommande() {
-		return commande;
+	public AchatId getId() {
+		return id;
 	}
 
-	public void setCommande(Commande commande) {
-		this.commande = commande;
-	}
-
-	public Produit getProduit() {
-		return produit;
-	}
-
-	public void setProduit(Produit produit) {
-		this.produit = produit;
+	public void setId(AchatId id) {
+		this.id = id;
 	}
 
 	public int getQuantite() {
@@ -66,7 +54,7 @@ public class Achat {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(commande, produit);
+		return Objects.hash(id);
 	}
 
 	@Override
@@ -78,7 +66,7 @@ public class Achat {
 		if (getClass() != obj.getClass())
 			return false;
 		Achat other = (Achat) obj;
-		return Objects.equals(commande, other.commande) && Objects.equals(produit, other.produit);
+		return Objects.equals(id, other.id);
 	}
 
 }

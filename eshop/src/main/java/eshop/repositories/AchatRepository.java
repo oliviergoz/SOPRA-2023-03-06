@@ -8,12 +8,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import eshop.entities.Achat;
+import eshop.entities.AchatId;
 import eshop.entities.AchatKey;
 import eshop.entities.Commande;
 
-public interface AchatRepository extends JpaRepository<Achat, AchatKey> {
+public interface AchatRepository extends JpaRepository<Achat, AchatId> {
 	@Modifying
 	@Transactional
-	@Query("delete from Achat a where a.commande=:commande")
+	@Query("delete from Achat a where a.id.commande=:commande")
 	void deleteByCommande(@Param("commande") Commande commande);
 }
