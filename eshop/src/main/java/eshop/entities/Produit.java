@@ -8,13 +8,17 @@ import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
+import eshop.entities.jsonviews.Exemple;
+import eshop.entities.jsonviews.JsonViews;
 
 @Entity // Produit est un entite=>associe à un table de la base
 @Table(name = "product") // par defaut le nom de la class est utilisé (attention au probleme des
@@ -24,15 +28,19 @@ public class Produit {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "product_id")
+	@JsonView({ JsonViews.Simple.class, Exemple.class })
 	private Long id;
 	@NotBlank(message = "il faut un libelle")
 	@Column(name = "label", nullable = false, length = 255)
+	@JsonView(JsonViews.Simple.class)
 	private String libelle;
 	@DecimalMin(value = "0.1")
 	@Column(name = "price")
+	@JsonView(JsonViews.Simple.class)
 	private double prix;
 	@Column(name = "description", columnDefinition = "TEXT")
 	@Lob
+	@JsonView(JsonViews.Simple.class)
 	private String description;
 	// 1 produit associe a 1 fournisseur=>????ToOne
 	// 1 produit peut etre associe à plusieurs fournisseurs=>????ToMany
@@ -40,6 +48,7 @@ public class Produit {
 	// 1 fournissuer peut distribuer plusieurs produit =>Many????
 	@ManyToOne // (fetch = FetchType.EAGER) valeur par defaut pour les relations @XXXToOne
 	@JoinColumn(name = "product_supplier_id", foreignKey = @ForeignKey(name = "product_supplier_id_fk"))
+	@JsonView(JsonViews.ProduitWithFournisseur.class)
 	private Fournisseur fournisseur;
 
 	// obligatoire pour jpa

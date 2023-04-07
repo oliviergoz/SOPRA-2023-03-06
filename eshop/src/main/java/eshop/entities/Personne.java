@@ -17,17 +17,23 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import eshop.entities.Adresse;
+import eshop.entities.jsonviews.JsonViews;
 
 @MappedSuperclass
 public abstract class Personne {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonView(JsonViews.Simple.class)
 	private Long id;
 	@NotBlank
+	@JsonView(JsonViews.Simple.class)
 	private String nom;
 	// @Transient //pas de correspondance dans la base
 	@Embedded
+	@JsonView(JsonViews.Simple.class)
 	private Adresse adresse;
 
 	public Personne() {
