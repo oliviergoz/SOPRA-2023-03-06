@@ -17,7 +17,6 @@ import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import eshop.entities.jsonviews.Exemple;
 import eshop.entities.jsonviews.JsonViews;
 
 @Entity // Produit est un entite=>associe à un table de la base
@@ -28,7 +27,7 @@ public class Produit {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "product_id")
-	@JsonView({ JsonViews.Simple.class, Exemple.class })
+	@JsonView({ JsonViews.Simple.class })
 	private Long id;
 	@NotBlank(message = "il faut un libelle")
 	@Column(name = "label", nullable = false, length = 255)
