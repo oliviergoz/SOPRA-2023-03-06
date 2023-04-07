@@ -10,6 +10,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import eshop.config.JpaConfig;
 import eshop.entities.Produit;
+import eshop.exceptions.ProduitException;
 import eshop.services.ProduitService;
 
 class ProduitServiceTest {
@@ -43,5 +44,8 @@ class ProduitServiceTest {
 		Produit produit = new Produit("test1", 1000);
 		produitService.createOrUpdate(produit);
 		assertNotNull(produit.getId());
+		assertThrows(ProduitException.class, ()->{
+			produitService.getById(99999999L);
+		});
 	}
 }
