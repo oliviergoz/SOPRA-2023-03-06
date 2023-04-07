@@ -11,9 +11,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import eshop.entities.Adresse;
 import eshop.entities.Civilite;
 import eshop.entities.Commande;
+import eshop.entities.jsonviews.JsonViews;
 
 @Entity
 @Table(name = "customer")
@@ -26,10 +29,13 @@ import eshop.entities.Commande;
 public class Client extends Personne {
 	@Column(name = "customer_first_name", nullable = false)
 	@NotBlank
+	@JsonView(JsonViews.Simple.class)
 	private String prenom;
 	@Enumerated(EnumType.STRING)
+	@JsonView(JsonViews.Simple.class)
 	@Column(name = "customer_civility")
 	private Civilite civilite;
+	@JsonView(JsonViews.ClientWithCommandes.class)
 	@OneToMany(mappedBy = "client")
 	private Set<Commande> commandes;
 

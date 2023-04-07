@@ -8,6 +8,10 @@ import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import eshop.entities.jsonviews.JsonViews;
+
 @Embeddable
 public class AchatId implements Serializable {
 	@ManyToOne
@@ -15,6 +19,7 @@ public class AchatId implements Serializable {
 	private Commande commande;
 	@ManyToOne
 	@JoinColumn(name = "purchase_v2_product_id", foreignKey = @ForeignKey(name = "purchase_v2_product_id_fk"), insertable = false, updatable = false)
+	@JsonView(JsonViews.CommandeWithAchats.class)
 	private Produit produit;
 
 	public AchatId() {

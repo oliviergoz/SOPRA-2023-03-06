@@ -31,7 +31,7 @@ public class FournisseurService {
 		});
 	}
 
-	public Fournisseur getIdWithProduits(Long id) {
+	public Fournisseur getByIdWithProduits(Long id) {
 		if (id == null) {
 			throw new FournisseurException("id obligatoire");
 		}

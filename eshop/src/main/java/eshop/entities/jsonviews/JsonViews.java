@@ -11,8 +11,28 @@ public class JsonViews {
 
 	}
 
-	//fournisseur avec sa liste de produits
-	public static class FournisseurWithProduits extends Simple {
+	public static class Fournisseur extends Simple {
+
+	}
+
+	// fournisseur avec sa liste de produits
+	public static class FournisseurWithProduits extends Fournisseur {
+
+	}
+
+	public static class Client extends Simple {
+
+	}
+
+	public static class ClientWithCommandes extends Client {
+
+	}
+
+	public static class Commande extends Simple {
+
+	}
+
+	public static class CommandeWithAchats extends Commande {
 
 	}
 }

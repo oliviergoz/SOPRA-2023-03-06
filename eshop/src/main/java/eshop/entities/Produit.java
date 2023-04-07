@@ -47,7 +47,7 @@ public class Produit {
 	// 1 fournissuer peut distribuer plusieurs produit =>Many????
 	@ManyToOne // (fetch = FetchType.EAGER) valeur par defaut pour les relations @XXXToOne
 	@JoinColumn(name = "product_supplier_id", foreignKey = @ForeignKey(name = "product_supplier_id_fk"))
-	@JsonView(JsonViews.ProduitWithFournisseur.class)
+	@JsonView({ JsonViews.ProduitWithFournisseur.class, JsonViews.CommandeWithAchats.class })
 	private Fournisseur fournisseur;
 
 	// obligatoire pour jpa

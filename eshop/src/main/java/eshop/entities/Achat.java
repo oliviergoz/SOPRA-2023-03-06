@@ -12,8 +12,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import eshop.entities.Commande;
 import eshop.entities.Produit;
+import eshop.entities.jsonviews.JsonViews;
 
 @Entity
 @Table(name = "purchase_v2")
@@ -21,9 +24,11 @@ import eshop.entities.Produit;
 public class Achat {
 
 	@EmbeddedId
+	@JsonView(JsonViews.CommandeWithAchats.class)
 	private AchatId id;
 
 	@Column(name = "quantity")
+	@JsonView(JsonViews.Simple.class)
 	private int quantite;
 
 	public Achat() {

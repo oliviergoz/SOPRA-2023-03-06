@@ -17,15 +17,22 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import eshop.entities.jsonviews.JsonViews;
+
 @Entity
 @Table(name = "shipping")
 
 public class Commande {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonView(JsonViews.Simple.class)
 	private Long numero;
 	@Column(name = "shipping_date")
+	@JsonView(JsonViews.Simple.class)
 	private LocalDate date;
+	@JsonView(JsonViews.Commande.class)
 	@ManyToOne
 	@JoinColumn(name = "shipping_id_customer", foreignKey = @ForeignKey(name = "shipping_id_customer_fk"))
 	private Client client;
@@ -45,6 +52,7 @@ public class Commande {
 
 	// IdClass
 	@OneToMany(mappedBy = "id.commande")
+	@JsonView(JsonViews.CommandeWithAchats.class)
 	private Set<Achat> achats = new HashSet<>();
 
 	public Set<Achat> getAchats() {
