@@ -55,8 +55,6 @@ public class CommandeRestController {
 	@PostMapping("/{id}")
 	@JsonView(JsonViews.Commande.class)
 	public Commande create(@RequestBody List<ElementPanier> panier, @PathVariable("id") Long idClient) {
-		System.out.println("here");
-		System.out.println(idClient);
 		Commande commande = new Commande(clientSrv.getById(idClient));
 		Set<Achat> achats = new HashSet<>();
 		panier.forEach(e -> {
