@@ -31,13 +31,13 @@ public class ClientRestController {
 	private ClientService clientSrv;
 
 	@GetMapping("")
-	@JsonView(JsonViews.Client.class)
+	@JsonView(JsonViews.ClientWithCompte.class)
 	public List<Client> getAll() {
 		return clientSrv.getAll();
 	}
 
 	@GetMapping("/{id}")
-	@JsonView(JsonViews.Client.class)
+	@JsonView(JsonViews.ClientWithCompte.class)
 	public Client getById(@PathVariable Long id) {
 		Client client = null;
 		client = clientSrv.getById(id);
@@ -45,15 +45,15 @@ public class ClientRestController {
 	}
 
 	@GetMapping("/{id}/commandes")
-	@JsonView(JsonViews.ClientWithCommandes.class)
+	@JsonView(JsonViews.ClientWithCompte.class)
 	public Client getByIdWithCommandes(@PathVariable Long id) {
 		Client client = null;
 		client = clientSrv.getByIdFetchCommandes(id);
 		return client;
 	}
 
-	@PostMapping("")
-	@JsonView(JsonViews.Client.class)
+	@PostMapping({ "", "/inscription" })
+	@JsonView(JsonViews.ClientWithCompte.class)
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public Client create(@Valid @RequestBody Client client, BindingResult br) {
 		if (br.hasErrors()) {
@@ -64,7 +64,7 @@ public class ClientRestController {
 	}
 
 	@PutMapping("/{id}")
-	@JsonView(JsonViews.Client.class)
+	@JsonView(JsonViews.ClientWithCompte.class)
 	public Client update(@RequestBody Client client, @PathVariable Long id) {
 		Client clientEnBase = clientSrv.getById(id);
 		if (client.getNom() != null) {

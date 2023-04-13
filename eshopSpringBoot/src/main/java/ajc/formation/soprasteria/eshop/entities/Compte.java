@@ -6,6 +6,8 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,19 +18,27 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import ajc.formation.soprasteria.eshop.entities.jsonviews.JsonViews;
+
 @Entity
 @Table(name = "users")
 public class Compte implements UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id")
+	@JsonView(JsonViews.Simple.class)
 	private Long id;
 	@Column(name = "login", nullable = false, unique = true)
+	@JsonView(JsonViews.Simple.class)
 	private String login;
 	@Column(name = "password", length = 255, nullable = false)
 	private String password;
 	@Column(name = "role", nullable = false)
 	// spring impose que les roles commence par ROLE_xxxx
+	@JsonView(JsonViews.Simple.class)
+	@Enumerated(EnumType.ORDINAL)
 	private Role role;
 	@OneToOne(mappedBy = "compte")
 	private Client client;
@@ -80,6 +90,7 @@ public class Compte implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
+		//new SimpleGrantedAuthority("ROLE_"+this.getClass().getSimpleName());
 		return Arrays.asList(new SimpleGrantedAuthority(role.toString()));
 	}
 

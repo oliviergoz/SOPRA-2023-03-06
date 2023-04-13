@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import ajc.formation.soprasteria.eshop.entities.Achat;
 import ajc.formation.soprasteria.eshop.entities.AchatId;
 import ajc.formation.soprasteria.eshop.entities.Commande;
+import ajc.formation.soprasteria.eshop.entities.Compte;
 import ajc.formation.soprasteria.eshop.entities.jsonviews.JsonViews;
 import ajc.formation.soprasteria.eshop.model.ElementPanier;
 import ajc.formation.soprasteria.eshop.services.ClientService;
@@ -52,10 +54,10 @@ public class CommandeRestController {
 		return commandeService.detail(numero);
 	}
 
-	@PostMapping("/{id}")
+	@PostMapping("")
 	@JsonView(JsonViews.Commande.class)
-	public Commande create(@RequestBody List<ElementPanier> panier, @PathVariable("id") Long idClient) {
-		Commande commande = new Commande(clientSrv.getById(idClient));
+	public Commande create(@RequestBody List<ElementPanier> panier, @AuthenticationPrincipal Compte compte) {
+		Commande commande = new Commande(compte.getClient());
 		Set<Achat> achats = new HashSet<>();
 		panier.forEach(e -> {
 			achats.add(new Achat(new AchatId(commande, produitSrv.getById(e.getIdProduit())), e.getQuantite()));

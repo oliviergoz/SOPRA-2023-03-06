@@ -38,11 +38,12 @@ public class Client extends Personne {
 	@JsonView(JsonViews.Simple.class)
 	@Column(name = "customer_civility")
 	private Civilite civilite;
-	@JsonView(JsonViews.ClientWithCommandes.class)
+	@JsonView({ JsonViews.ClientWithCommandes.class, JsonViews.ClientWithCompte.class })
 	@OneToMany(mappedBy = "client")
 	private Set<Commande> commandes;
 	@OneToOne
 	@JoinColumn(name = "customer_user_id", foreignKey = @ForeignKey(name = "customer_user_id_fk"))
+	@JsonView(JsonViews.ClientWithCompte.class)
 	private Compte compte;
 
 	public Client() {

@@ -23,6 +23,10 @@ public class JsonViews {
 	public static class Client extends Simple {
 
 	}
+	
+	public static class ClientWithCompte extends Client{
+		
+	}
 
 	public static class ClientWithCommandes extends Client {
 
