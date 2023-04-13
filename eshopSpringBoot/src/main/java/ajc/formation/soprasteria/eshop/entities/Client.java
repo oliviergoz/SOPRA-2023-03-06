@@ -7,7 +7,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.ForeignKey;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
@@ -38,6 +41,9 @@ public class Client extends Personne {
 	@JsonView(JsonViews.ClientWithCommandes.class)
 	@OneToMany(mappedBy = "client")
 	private Set<Commande> commandes;
+	@OneToOne
+	@JoinColumn(name = "customer_user_id", foreignKey = @ForeignKey(name = "customer_user_id_fk"))
+	private Compte compte;
 
 	public Client() {
 
@@ -73,6 +79,14 @@ public class Client extends Personne {
 
 	public void setCommandes(Set<Commande> commandes) {
 		this.commandes = commandes;
+	}
+
+	public Compte getCompte() {
+		return compte;
+	}
+
+	public void setCompte(Compte compte) {
+		this.compte = compte;
 	}
 
 }

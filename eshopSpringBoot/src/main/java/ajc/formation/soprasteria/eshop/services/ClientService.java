@@ -1,3 +1,4 @@
+
 package ajc.formation.soprasteria.eshop.services;
 
 import java.util.List;
@@ -17,6 +18,7 @@ import ajc.formation.soprasteria.eshop.entities.Client;
 import ajc.formation.soprasteria.eshop.exceptions.ClientException;
 import ajc.formation.soprasteria.eshop.repositories.ClientRepository;
 import ajc.formation.soprasteria.eshop.repositories.CommandeRepository;
+import ajc.formation.soprasteria.eshop.repositories.CompteRepository;
 
 @Service
 public class ClientService {
@@ -24,12 +26,30 @@ public class ClientService {
 	private ClientRepository clientRepository;
 	@Autowired
 	private CommandeRepository commandeRepository;
+	@Autowired
+	private CompteService compteSrv;
 
-	public Client createOrUpdate(Client client) {
+	public Client create(Client client) {
 		Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 		Set<ConstraintViolation<Client>> violations = validator.validate(client);
 		if (violations.isEmpty()) {
+			compteSrv.createUser(client.getCompte());
 			return clientRepository.save(client);
+		} else {
+			throw new ClientException();
+		}
+	}
+
+	public Client update(Client client) {
+		Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+		Set<ConstraintViolation<Client>> violations = validator.validate(client);
+		if (violations.isEmpty()) {
+			Client clientEnBase = getById(client.getId());
+			clientEnBase.setNom(client.getNom());
+			clientEnBase.setPrenom(client.getPrenom());
+			clientEnBase.setAdresse(client.getAdresse());
+			clientEnBase.setCivilite(client.getCivilite());
+			return clientRepository.save(clientEnBase);
 		} else {
 			throw new ClientException();
 		}

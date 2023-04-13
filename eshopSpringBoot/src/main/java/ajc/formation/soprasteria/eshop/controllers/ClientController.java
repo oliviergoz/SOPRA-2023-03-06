@@ -31,11 +31,13 @@ public class ClientController {
 
 	@GetMapping("/edit")
 	public String edit(Model model, @RequestParam Long id) {
+		model.addAttribute("create", false);
 		return form(model, clientSrv.getById(id));
 	}
 
-	@GetMapping("/add")
+	@GetMapping({"/add","/inscription"})
 	public String create(Model model) {
+		model.addAttribute("create", true);
 		return form(model, new Client());
 	}
 
@@ -53,11 +55,16 @@ public class ClientController {
 	}
 
 	@PostMapping("/save")
-	public String save(@Valid @ModelAttribute Client client, BindingResult br, Model model) {
+	public String save(@Valid @ModelAttribute Client client, BindingResult br, Model model,
+			@RequestParam boolean create) {
 		if (br.hasErrors()) {
 			return form(model, client);
 		}
-		clientSrv.createOrUpdate(client);
+		if (create) {
+			clientSrv.create(client);
+		} else {
+			clientSrv.update(client);
+		}
 		return "redirect:/client";
 	}
 

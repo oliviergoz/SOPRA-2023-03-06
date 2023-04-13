@@ -23,6 +23,7 @@
 		<h1>edition client</h1>
 		<div>
 			<form:form action="client/save" method="post" modelAttribute="client">
+				<input type="hidden" name="create" value="${create}">
 				<div class="form-group">
 					<form:label path="id">id:</form:label>
 					<form:input path="id" readonly="true" class="form-control" />
@@ -46,7 +47,21 @@
 					<form:input path="nom" class="form-control" />
 					<form:errors path="nom" class="alert alert-danger" element="div"></form:errors>
 				</div>
-
+				<c:if test="${create}">
+					<div class="form-group">
+						<form:label path="compte.login">login:</form:label>
+						<form:input path="compte.login" class="form-control" />
+						<form:errors path="compte.login" class="alert alert-danger"
+							element="div"></form:errors>
+					</div>
+					<div class="form-group">
+						<form:label path="compte.password">password:</form:label>
+						<form:input type="password" path="compte.password"
+							class="form-control" />
+						<form:errors path="compte.password" class="alert alert-danger"
+							element="div"></form:errors>
+					</div>
+				</c:if>
 				<div class="form-group">
 					<form:label path="adresse.numero">numero:</form:label>
 					<form:input path="adresse.numero" class="form-control" />

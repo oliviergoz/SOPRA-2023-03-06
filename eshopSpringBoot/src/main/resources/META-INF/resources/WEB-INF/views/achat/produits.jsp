@@ -34,6 +34,6 @@
 			</tr>
 		</c:forEach>
 	</table>
-	<a href="achat/client" class="btn btn-link">valider panier</a>
+	<a href="achat/save" class="btn btn-link">valider panier</a>
 </body>
 </html>

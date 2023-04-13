@@ -59,7 +59,7 @@ public class ClientRestController {
 		if (br.hasErrors()) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 		}
-		clientSrv.createOrUpdate(client);
+		clientSrv.create(client);
 		return client;
 	}
 
@@ -79,7 +79,7 @@ public class ClientRestController {
 		if (client.getCivilite() != null) {
 			clientEnBase.setCivilite(client.getCivilite());
 		}
-		clientSrv.createOrUpdate(clientEnBase);
+		clientSrv.update(clientEnBase);
 		return clientEnBase;
 	}
 

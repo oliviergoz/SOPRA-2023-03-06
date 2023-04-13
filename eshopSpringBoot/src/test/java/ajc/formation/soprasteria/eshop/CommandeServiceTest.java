@@ -38,7 +38,7 @@ class CommandeServiceTest {
 	@Test
 	void insertCommandeAvecRepoTest() {
 		Client client = new Client("lll", null, "lllll", Civilite.M);
-		clientSrv.createOrUpdate(client);
+		clientSrv.create(client);
 		Commande commande = new Commande(client);
 
 		commandeRepo.save(commande);

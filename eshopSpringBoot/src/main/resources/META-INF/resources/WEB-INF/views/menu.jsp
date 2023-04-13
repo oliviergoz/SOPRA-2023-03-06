@@ -10,4 +10,7 @@
 		<a
 		href="${pageContext.request.contextPath}/achat/produit"
 		class="btn btn-link">acheter</a>
+		<a
+		href="${pageContext.request.contextPath}/client/inscription"
+		class="btn btn-link">inscription</a>
 </nav>

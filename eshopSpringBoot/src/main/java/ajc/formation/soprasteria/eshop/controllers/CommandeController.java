@@ -8,6 +8,8 @@ import java.util.Set;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +20,7 @@ import ajc.formation.soprasteria.eshop.entities.Achat;
 import ajc.formation.soprasteria.eshop.entities.AchatId;
 import ajc.formation.soprasteria.eshop.entities.Client;
 import ajc.formation.soprasteria.eshop.entities.Commande;
+import ajc.formation.soprasteria.eshop.entities.Compte;
 import ajc.formation.soprasteria.eshop.entities.Produit;
 import ajc.formation.soprasteria.eshop.services.ClientService;
 import ajc.formation.soprasteria.eshop.services.CommandeService;
@@ -66,20 +69,21 @@ public class CommandeController {
 		return "redirect:/achat/produit";
 	}
 
-	@GetMapping("/achat/client")
-	public String login(Model model) {
-		model.addAttribute("clients", clientSrv.getAll());
-		return "achat/client";
-	}
+//	@GetMapping("/achat/client")
+//	public String login(Model model) {
+//		model.addAttribute("clients", clientSrv.getAll());
+//		return "achat/client";
+//	}
 
-	@PostMapping("/achat/save")
-	public String saveCommande(@RequestParam Long id, HttpSession session) {
-		Client client = clientSrv.getById(id);
+	@GetMapping("/achat/save")
+	public String saveCommande(@AuthenticationPrincipal UserDetails userDetails, HttpSession session) {
+		Compte compte = (Compte) userDetails;
+		Client client = compte.getClient();
 		Map<Produit, Integer> panier = (Map<Produit, Integer>) session.getAttribute("panier");
 		Commande commande = new Commande(client);
 		Set<Achat> achats = new HashSet<>();
 		panier.forEach((k, v) -> {
-			achats.add(new Achat(new AchatId(commande, k) , v));
+			achats.add(new Achat(new AchatId(commande, k), v));
 		});
 		commande.setAchats(achats);
 		commandeSrv.create(commande);
