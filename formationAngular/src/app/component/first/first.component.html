@@ -1,3 +1,6 @@
 <p>texte: {{ texte }}</p>
 <p>nombre:{{ nombre }} <button (click)="click()">+1</button></p>
-<img [src]="image" height="50%" width="50%" />
+<div><input [(ngModel)]="texte" /></div>
+<div *ngIf="texte == 'image'">
+  <img [src]="image" height="50%" width="50%" />
+</div>
