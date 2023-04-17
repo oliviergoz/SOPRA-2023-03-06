@@ -1,4 +1,9 @@
-<p>
-  info du produit:{{ produit.infos() }}<br />
-  {{ message }} {{ produit.hello }}
-</p>
+<h1 important>un titre</h1>
+filtre par nom de produit:<input [(ngModel)]="filtre" />
+<table class="table">
+  <tr *ngFor="let p of filter()" [ngClass]="{ rouge: p.prix < 0 }">
+    <td important>{{ p.nom }}</td>
+    <td>{{ p.prix }}</td>
+  </tr>
+</table>
+<app-form-produit (produitEvent)="addProduit($event)"></app-form-produit>

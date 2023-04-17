@@ -12,6 +12,12 @@ import { InputComponent } from './component/form/input/input.component';
 import { EquipeComponent } from './component/sondage/equipe/equipe.component';
 import { SondageComponent } from './component/sondage/sondage/sondage.component';
 import { DirectiveComponent } from './component/directive/directive.component';
+import { FormProduitComponent } from './form-produit/form-produit.component';
+import { ImportantDirective } from './directive/important.directive';
+import { LinkDirective } from './directive/bootstrap/link.directive';
+import { WarningButtonDirective } from './directive/bootstrap/warning-button.directive';
+import { PrimaryButtonDirective } from './directive/bootstrap/primary-button.directive';
+import { DangerButtonDirective } from './directive/bootstrap/danger-button.directive';
 
 @NgModule({
   declarations: [
@@ -26,6 +32,12 @@ import { DirectiveComponent } from './component/directive/directive.component';
     EquipeComponent,
     SondageComponent,
     DirectiveComponent,
+    FormProduitComponent,
+    ImportantDirective,
+    LinkDirective,
+    WarningButtonDirective,
+    PrimaryButtonDirective,
+    DangerButtonDirective,
   ],
   imports: [BrowserModule, FormsModule],
   providers: [],

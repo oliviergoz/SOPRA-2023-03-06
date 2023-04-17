@@ -2,7 +2,7 @@
 
 <div
   *ngIf="variableIf; else etiquette"
-  [ngClass]="{ vert: styleVert, rouge: !styleVert }"
+  [ngClass]="{ vert: texte == 'vert', rouge: texte == 'rouge' }"
 >
   if=>true
 </div>

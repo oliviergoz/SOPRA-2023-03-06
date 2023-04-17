@@ -7,6 +7,15 @@ import { Produit } from 'src/app/model/produit';
   styleUrls: ['./produit.component.css'],
 })
 export class ProduitComponent {
-  produit: Produit = new Produit();
-  message: string = this.produit.hello;
+  produits: Produit[] = [new Produit('pc', 700), new Produit('velo', 4000)];
+
+  filtre: string = '';
+
+  filter() {
+    return this.produits.filter((p) => p.nom?.indexOf(this.filtre) != -1);
+  }
+
+  addProduit(produit: Produit) {
+    this.produits.push(produit);
+  }
 }

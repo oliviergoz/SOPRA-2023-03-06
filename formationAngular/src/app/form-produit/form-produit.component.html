@@ -1,0 +1,13 @@
+<div>
+  <div class="form-group">
+    <label>nom:<input [(ngModel)]="produit.nom" /></label>
+  </div>
+  <div class="form-group">
+    <label
+      >prix:<input type="number" step="0.1" [(ngModel)]="produit.prix"
+    /></label>
+  </div>
+  <div>
+    <button primary-button (click)="add()">ajouter</button>
+  </div>
+</div>
