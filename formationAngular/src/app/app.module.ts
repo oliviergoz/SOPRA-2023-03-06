@@ -9,6 +9,8 @@ import { ClientComponent } from './component/client/client/client.component';
 import { FormClientComponent } from './component/client/form-client/form-client.component';
 import { ShowClientComponent } from './component/client/show-client/show-client.component';
 import { InputComponent } from './component/form/input/input.component';
+import { EquipeComponent } from './component/sondage/equipe/equipe.component';
+import { SondageComponent } from './component/sondage/sondage/sondage.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { InputComponent } from './component/form/input/input.component';
     FormClientComponent,
     ShowClientComponent,
     InputComponent,
+    EquipeComponent,
+    SondageComponent,
   ],
   imports: [BrowserModule, FormsModule],
   providers: [],

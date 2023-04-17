@@ -1,0 +1,8 @@
+<div *ngIf="equipe">
+  equipe la plus poulaire:{{ equipe }} avec {{ vote }} votes
+</div>
+<app-equipe equipe="psg" (voteEvent)="traitementVote($event)"> </app-equipe>
+<app-equipe equipe="om" (voteEvent)="traitementVote($event)"></app-equipe>
+<app-equipe equipe="ol" (voteEvent)="traitementVote($event)"></app-equipe>
+<app-equipe equipe="losc" (voteEvent)="traitementVote($event)"></app-equipe>
+<app-equipe equipe="nice" (voteEvent)="traitementVote($event)"></app-equipe>
