@@ -11,6 +11,7 @@ import { ShowClientComponent } from './component/client/show-client/show-client.
 import { InputComponent } from './component/form/input/input.component';
 import { EquipeComponent } from './component/sondage/equipe/equipe.component';
 import { SondageComponent } from './component/sondage/sondage/sondage.component';
+import { DirectiveComponent } from './component/directive/directive.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { SondageComponent } from './component/sondage/sondage/sondage.component'
     InputComponent,
     EquipeComponent,
     SondageComponent,
+    DirectiveComponent,
   ],
   imports: [BrowserModule, FormsModule],
   providers: [],
