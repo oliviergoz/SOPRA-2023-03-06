@@ -1,0 +1,11 @@
+<div>
+  <app-input etiquette="prenom" (dataReady)="prenom($event)"></app-input>
+  <div>nom:<input [(ngModel)]="client.nom" /></div>
+  <div>
+    type:<select [(ngModel)]="client.type">
+      <option value="Particulier">particulier</option>
+      <option value="Entreprise">entreprise</option>
+    </select>
+  </div>
+  <div><button (click)="sendClient()">envoyer</button></div>
+</div>
