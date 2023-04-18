@@ -1,0 +1,11 @@
+<ng-container *ngIf="display; else edition">
+  <td>{{ produit.nom }}</td>
+  <td>{{ produit.prix }}</td>
+  <td><button primary-button (click)="edit()">editer</button></td>
+</ng-container>
+
+<ng-template #edition>
+  <td><input [(ngModel)]="produit.nom" /></td>
+  <td><input [(ngModel)]="produit.prix" /></td>
+  <td><button primary-button (click)="save()">enregistrer</button></td>
+</ng-template>

@@ -1,9 +1,23 @@
 <h1 important>un titre</h1>
 filtre par nom de produit:<input [(ngModel)]="filtre" />
-<table class="table">
-  <tr *ngFor="let p of filter()" [ngClass]="{ rouge: p.prix < 0 }">
-    <td important>{{ p.nom }}</td>
-    <td>{{ p.prix }}</td>
-  </tr>
+<table class="table table-striped">
+  <tbody>
+    <tr *ngFor="let p of filter()" [ngClass]="{ rouge: p.prix < 0 }">
+      <td important>{{ p.nom }}</td>
+      <td>{{ p.prix }}</td>
+    </tr>
+  </tbody>
 </table>
 <app-form-produit (produitEvent)="addProduit($event)"></app-form-produit>
+
+<table class="table table-striped">
+  <tbody>
+    <tr
+      tr-produit
+      *ngFor="let produit of filter(); let index = index"
+      [produit]="produit"
+      [index]="index"
+      (produitChange)="updateProduit($event)"
+    ></tr>
+  </tbody>
+</table>
