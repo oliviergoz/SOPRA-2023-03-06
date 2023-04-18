@@ -18,6 +18,13 @@ import { LinkDirective } from './directive/bootstrap/link.directive';
 import { WarningButtonDirective } from './directive/bootstrap/warning-button.directive';
 import { PrimaryButtonDirective } from './directive/bootstrap/primary-button.directive';
 import { DangerButtonDirective } from './directive/bootstrap/danger-button.directive';
+import { DemoSelectorComponent } from './component/demo-selector/demo-selector.component';
+import { TrProduitComponent } from './component/produit/tr-produit/tr-produit.component';
+import { NavMenuComponent } from './component/nav-menu/nav-menu.component';
+import { RouterModule } from '@angular/router';
+import { HomeComponent } from './component/home/home.component';
+import { routes } from './routes';
+import { BonjourComponent } from './component/bonjour/bonjour.component';
 
 @NgModule({
   declarations: [
@@ -38,8 +45,13 @@ import { DangerButtonDirective } from './directive/bootstrap/danger-button.direc
     WarningButtonDirective,
     PrimaryButtonDirective,
     DangerButtonDirective,
+    DemoSelectorComponent,
+    TrProduitComponent,
+    NavMenuComponent,
+    HomeComponent,
+    BonjourComponent,
   ],
-  imports: [BrowserModule, FormsModule],
+  imports: [BrowserModule, FormsModule, RouterModule.forRoot(routes)],
   providers: [],
   bootstrap: [AppComponent],
 })

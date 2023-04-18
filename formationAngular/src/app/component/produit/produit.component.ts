@@ -18,4 +18,8 @@ export class ProduitComponent {
   addProduit(produit: Produit) {
     this.produits.push(produit);
   }
+
+  updateProduit(obj: any) {
+    this.produits[obj.index] = obj.produit;
+  }
 }

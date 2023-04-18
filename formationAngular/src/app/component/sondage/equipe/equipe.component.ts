@@ -18,7 +18,7 @@ export class EquipeComponent implements OnInit {
   voteEvent: EventEmitter<Equipe> = new EventEmitter();
 
   voter() {
-    this.vote++;
+    this.equipe.vote++;
     this.voteEvent.emit(this.equipe);
   }
 }
