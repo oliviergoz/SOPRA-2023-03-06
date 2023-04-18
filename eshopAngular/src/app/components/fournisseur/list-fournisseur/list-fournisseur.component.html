@@ -1,0 +1,27 @@
+<table class="table">
+  <tbody>
+    <tr *ngFor="let f of fournisseurs">
+      <td>{{ f.id }}</td>
+      <td>{{ f.nom }}</td>
+      <td>{{ f.contact }}</td>
+      <td>{{ f.adresse?.numero }}</td>
+      <td>{{ f.adresse?.rue }}</td>
+      <td>{{ f.adresse?.codePostal }}</td>
+      <td>{{ f.adresse?.ville }}</td>
+      <td>
+        <app-link lien="/fournisseur/edit/{{ f.id }}" etiquetteLien="edition"
+          >edition</app-link
+        >
+      </td>
+      <td>
+        <button (click)="delete(f.id!)" class="btn btn-outline-danger">
+          supprimer
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<app-link
+  lien="/fournisseur/add"
+  etiquetteLien="creation fournisseur"
+></app-link>

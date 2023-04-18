@@ -1,0 +1,61 @@
+<div>
+  <h2>fournisseur</h2>
+  <div>
+    <div class="form-group">
+      <label
+        >id:<input [(ngModel)]="fournisseur.id" readonly class="form-control" />
+      </label>
+    </div>
+    <div class="form-group">
+      <label
+        >nom:<input [(ngModel)]="fournisseur.nom" class="form-control" />
+      </label>
+    </div>
+    <div class="form-group">
+      <label
+        >contact:<input
+          [(ngModel)]="fournisseur.contact"
+          class="form-control"
+        />
+      </label>
+    </div>
+    <div class="form-group">
+      <label
+        >numero:<input
+          [(ngModel)]="fournisseur.adresse!.numero"
+          class="form-control"
+        />
+      </label>
+    </div>
+    <div class="form-group">
+      <label
+        >rue:<input
+          [(ngModel)]="fournisseur.adresse!.rue"
+          class="form-control"
+        />
+      </label>
+    </div>
+    <div class="form-group">
+      <label
+        >code postal:<input
+          [(ngModel)]="fournisseur.adresse!.codePostal"
+          class="form-control"
+        />
+      </label>
+    </div>
+    <div class="form-group">
+      <label
+        >ville:<input
+          [(ngModel)]="fournisseur.adresse!.ville"
+          class="form-control"
+        />
+      </label>
+    </div>
+    <div class="form-group">
+      <button (click)="save()" class="btn btn-outline-primary">
+        enregistrer
+      </button>
+      <a routerLink="/fournisseur" class="btn btn-outline-warning">annuler</a>
+    </div>
+  </div>
+</div>
