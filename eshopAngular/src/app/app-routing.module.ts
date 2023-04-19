@@ -10,19 +10,60 @@ import { ListClientComponent } from './components/client/list-client/list-client
 import { EditClientComponent } from './components/client/edit-client/edit-client.component';
 import { AchatComponent } from './components/achat/achat/achat.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { ClientGuardService } from './services/client-guard.service';
+import { AnonymousGuardService } from './services/anonymous-guard.service';
+import { AuthGuardService } from './services/auth-guard.service';
+import { AdminGuardService } from './services/admin-guard.service';
+import { UserGuardService } from './services/user-guard.service';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'produit', component: ListProduitComponent },
-  { path: 'produit/add', component: EditProduitComponent },
-  { path: 'produit/edit/:id', component: EditProduitComponent },
-  { path: 'fournisseur', component: ListFournisseurComponent },
-  { path: 'fournisseur/add', component: EditFournisseurComponent },
-  { path: 'fournisseur/edit/:id', component: EditFournisseurComponent },
-  { path: 'client', component: ListClientComponent },
-  { path: 'client/:id', component: EditClientComponent },
-  { path: 'achat', component: AchatComponent },
+  {
+    path: 'login',
+    component: LoginComponent,
+    canActivate: [AnonymousGuardService],
+  },
+  {
+    path: 'produit',
+    component: ListProduitComponent,
+    canActivate: [AdminGuardService],
+  },
+  {
+    path: 'produit/add',
+    component: EditProduitComponent,
+    canActivate: [AdminGuardService],
+  },
+  {
+    path: 'produit/edit/:id',
+    component: EditProduitComponent,
+    canActivate: [AdminGuardService],
+  },
+  {
+    path: 'fournisseur',
+    component: ListFournisseurComponent,
+    canActivate: [AdminGuardService],
+  },
+  {
+    path: 'fournisseur/add',
+    component: EditFournisseurComponent,
+    canActivate: [AdminGuardService],
+  },
+  {
+    path: 'fournisseur/edit/:id',
+    component: EditFournisseurComponent,
+    canActivate: [AdminGuardService],
+  },
+  {
+    path: 'client',
+    component: ListClientComponent,
+    canActivate: [AdminGuardService],
+  },
+  {
+    path: 'client/:id',
+    component: EditClientComponent,
+    canActivate: [AdminGuardService],
+  },
+  { path: 'achat', component: AchatComponent, canActivate: [UserGuardService] },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: NotFoundComponent },
 ];

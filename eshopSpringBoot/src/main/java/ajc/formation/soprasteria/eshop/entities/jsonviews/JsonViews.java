@@ -39,4 +39,9 @@ public class JsonViews {
 	public static class CommandeWithAchats extends Commande {
 
 	}
+	
+	public static class Compte extends Simple{
+		
+	}
+	
 }

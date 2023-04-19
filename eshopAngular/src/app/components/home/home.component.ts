@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Compte } from 'src/app/model/compte';
 import { ServiceExempleService } from 'src/app/services/service-exemple.service';
 
 @Component({
@@ -11,5 +12,14 @@ export class HomeComponent {
 
   get message() {
     return this.monService.sayHello();
+  }
+
+  get welcome() {
+    let _welcome = 'bonjour ';
+    if (sessionStorage.getItem('compte')) {
+      let compte = JSON.parse(sessionStorage.getItem('compte')!) as Compte;
+      _welcome = _welcome + compte.login;
+    }
+    return _welcome;
   }
 }

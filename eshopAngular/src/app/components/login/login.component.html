@@ -1,1 +1,21 @@
-<p>login works!</p>
+<h2>identifiez vous</h2>
+<div>
+  <div class="alert alert-danger" *ngIf="showError">
+    information incorrectes
+  </div>
+  <div class="form-group">
+    <label>login:<input class="form-control" [(ngModel)]="login" /></label>
+  </div>
+  <div class="form-group">
+    <label
+      >mot de passe:<input
+        type="password"
+        class="form-control"
+        [(ngModel)]="password"
+    /></label>
+  </div>
+  <div class="form-group">
+    <button class="btn btn-outline-primary" (click)="check()">envoyer</button
+    ><app-link etiquetteLien="retour acceuil" lien="/home"></app-link>
+  </div>
+</div>

@@ -15,13 +15,14 @@ export class AuthInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    request = request.clone({
-      headers: request.headers.append(
-        'Authorization',
-        'Basic ' + window.btoa('admin:admin')
-      ),
-    });
-
+    if (sessionStorage.getItem('token')) {
+      request = request.clone({
+        headers: request.headers.append(
+          'Authorization',
+          sessionStorage.getItem('token')!
+        ),
+      });
+    }
     return next.handle(request);
   }
 }
