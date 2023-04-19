@@ -1,1 +1,48 @@
-<p>edit-produit works!</p>
+<h2>produit</h2>
+
+<div>
+  <div>
+    <label for="id">id:</label>
+    <input id="id" [(ngModel)]="produit.id" readonly class="form-control" />
+  </div>
+  <div>
+    <label for="libelle">libelle:</label>
+    <input id="libelle" [(ngModel)]="produit.libelle" class="form-control" />
+  </div>
+  <div>
+    <label for="prix">prix:</label>
+    <input
+      type="number"
+      step="0.1"
+      id="prix"
+      [(ngModel)]="produit.prix"
+      class="form-control"
+    />
+  </div>
+  <div>
+    <label for="description">description:</label>
+    <textarea
+      id="description"
+      [(ngModel)]="produit.description"
+      class="form-control"
+    ></textarea>
+  </div>
+  <div>
+    <label for="fournisseur">fournisseur:</label>
+    <select
+      [(ngModel)]="produit.fournisseur"
+      class="form-control"
+      [compareWith]="compareById"
+    >
+      <option *ngFor="let f of obsFournisseurs | async" [ngValue]="f">
+        {{ f.id }} {{ f.nom }}
+      </option>
+    </select>
+  </div>
+  <div class="form-group">
+    <button (click)="save()" class="btn btn-outline-primary">
+      enregistrer
+    </button>
+    <a routerLink="/produit" class="btn btn-outline-warning">annuler</a>
+  </div>
+</div>

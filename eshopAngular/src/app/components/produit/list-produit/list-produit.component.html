@@ -1,1 +1,36 @@
-<p>list-produit works!</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th>id:</th>
+      <th>libelle:</th>
+      <th>prix:</th>
+      <th>description:</th>
+      <th>fournisseur:</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let p of produits">
+      <td>{{ p.id }}</td>
+      <td>{{ p.libelle }}</td>
+      <td>{{ p.prix }}</td>
+      <td>{{ p.description }}</td>
+      <td>{{ p.fournisseur?.nom }}</td>
+      <td>
+        <a
+          routerLink="/produit/edit/{{ p.id }}"
+          routerLinkActive="active"
+          class="btn btn-outline-primary"
+          >editer</a
+        >
+      </td>
+      <td>
+        <button class="btn btn-outline-danger" (click)="delete(p.id!)">
+          suppression
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<app-link etiquetteLien="nouveau produit" lien="/produit/add"></app-link>
