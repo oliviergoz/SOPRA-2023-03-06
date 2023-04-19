@@ -15,8 +15,9 @@ import { LoginComponent } from './components/login/login.component';
 import { AchatComponent } from './components/achat/achat/achat.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { LinkComponent } from './components/link/link.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { AuthInterceptor } from './interceptor/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,9 @@ import { FormsModule } from '@angular/forms';
     LinkComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
