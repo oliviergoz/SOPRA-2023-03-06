@@ -3,7 +3,40 @@
     <div class="form-group">
       <label for="control1">control1</label>
       <input id="control1" class="form-control" formControlName="control1" />
+      <span *ngIf="form.get('control1')?.hasError('toto')">toto interdit</span>
+      <span *ngIf="form.get('control1')?.hasError('chaineInterdite')"
+        >une chaine perso interdite</span
+      >
     </div>
+    <div class="form-group">
+      <label for="control2">control2</label>
+      <input id="control2" class="form-control" formControlName="control2" />
+    </div>
+    <ng-container formGroupName="groupEgalite">
+      <div class="form-group">
+        <label for="testControlEgaux1">test egalite</label>
+        <input
+          id="testControlEgaux1"
+          class="form-control"
+          formControlName="testControlEgaux1"
+        />
+      </div>
+      <div class="form-group">
+        <label for="testControlEgaux2">test egalite</label>
+        <input
+          id="testControlEgaux2"
+          class="form-control"
+          formControlName="testControlEgaux2"
+        />
+        <span
+          *ngIf="
+            form.get('groupEgalite')?.dirty &&
+            form.get('groupEgalite')?.hasError('egalite')
+          "
+          >valeur egal</span
+        >
+      </div>
+    </ng-container>
     <div>
       <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
         envoyer
