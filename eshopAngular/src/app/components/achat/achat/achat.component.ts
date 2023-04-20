@@ -28,7 +28,6 @@ export class AchatComponent implements OnInit {
       this.panier = new Map<number, number>();
       sessionStorage.setItem('panier', this.convert.panierToJson(this.panier));
     }
-    console.debug(this.panier);
   }
 
   addPanier(id: number) {
@@ -38,7 +37,6 @@ export class AchatComponent implements OnInit {
       this.panier.set(id, 1);
     }
     sessionStorage.setItem('panier', this.convert.panierToJson(this.panier));
-    console.debug(sessionStorage.getItem('panier'));
   }
 
   quantite(id: number): number | undefined {
@@ -56,7 +54,6 @@ export class AchatComponent implements OnInit {
 
   valider() {
     this.achatSrv.create().subscribe((commande) => {
-      console.debug(commande.numero);
       sessionStorage.removeItem('panier');
       this.router.navigateByUrl('/home');
     });

@@ -1,0 +1,13 @@
+<div>
+  <form (ngSubmit)="submit()" [formGroup]="form">
+    <div class="form-group">
+      <label for="control1">control1</label>
+      <input id="control1" class="form-control" formControlName="control1" />
+    </div>
+    <div>
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+        envoyer
+      </button>
+    </div>
+  </form>
+</div>

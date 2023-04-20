@@ -15,6 +15,7 @@ import { AnonymousGuardService } from './services/anonymous-guard.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { AdminGuardService } from './services/admin-guard.service';
 import { UserGuardService } from './services/user-guard.service';
+import { FormulaireComponent } from './components/formulaire/formulaire.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -58,6 +59,7 @@ const routes: Routes = [
     component: ListClientComponent,
     canActivate: [AdminGuardService],
   },
+  { path: 'formulaire', component: FormulaireComponent },
   {
     path: 'client/:id',
     component: EditClientComponent,
