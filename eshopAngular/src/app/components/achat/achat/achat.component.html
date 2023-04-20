@@ -1,1 +1,26 @@
-<p>achat works!</p>
+<table class="'table">
+  <tbody>
+    <tr *ngFor="let p of obsProduit | async">
+      <td>{{ p.libelle }}</td>
+      <td>{{ p.prix }}</td>
+      <td>
+        <button class="btn btn-link" (click)="addPanier(p.id!)">
+          ajouter au panier
+        </button>
+      </td>
+      <td>
+        {{ quantite(p.id!) }}
+      </td>
+      <td>
+        <button
+          *ngIf="quantite(p.id!) && quantite(p.id!)! > 0"
+          class="btn btn-link"
+          (click)="remove(p.id!)"
+        >
+          retirer un element
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<button (click)="valider()">valider commande</button>

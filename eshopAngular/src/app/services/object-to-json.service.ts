@@ -41,4 +41,12 @@ export class ObjectToJsonService {
     }
     return obj;
   }
+
+  public panierToJson(panier: Map<number, number>): any {
+    return JSON.stringify(Object.fromEntries(panier));
+  }
+
+  public panierJsonToMap(panierJson: any) {
+    return new Map(Object.entries(JSON.parse(panierJson)));
+  }
 }
