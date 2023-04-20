@@ -61,7 +61,11 @@ const routes: Routes = [
     canActivate: [AdminGuardService],
   },
   { path: 'formulaire', component: FormulaireComponent },
-  { path: 'inscription', component: InscriptionComponent },
+  {
+    path: 'inscription',
+    component: InscriptionComponent,
+    canActivate: [AnonymousGuardService],
+  },
   {
     path: 'client/:id',
     component: EditClientComponent,

@@ -1,1 +1,63 @@
-<p>inscription works!</p>
+<h2>inscription</h2>
+<form (ngSubmit)="submit()" [formGroup]="form">
+  <div class="form-group">
+    <label for="civilite">civilite:</label>
+    <select id="civilite" class="form-control" formControlName="civilite">
+      <option *ngFor="let c of civilites | keyvalue" [ngValue]="c.key">
+        {{ c.value }}
+      </option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="prenom">prenom:</label>
+    <input id="prenom" class="form-control" formControlName="prenom" />
+  </div>
+  <div class="form-group">
+    <label for="nom">nom:</label>
+    <input id="nom" class="form-control" formControlName="nom" />
+  </div>
+  <div class="form-group">
+    <label for="numero">numero:</label>
+    <input id="numero" class="form-control" formControlName="numero" />
+  </div>
+  <div class="form-group">
+    <label for="rue">rue:</label>
+    <input id="rue" class="form-control" formControlName="rue" />
+  </div>
+  <div class="form-group">
+    <label for="codePostal">code postal:</label>
+    <input id="codePostal" class="form-control" formControlName="codePostal" />
+  </div>
+  <div class="form-group">
+    <label for="ville">ville:</label>
+    <input id="ville" class="form-control" formControlName="ville" />
+  </div>
+  <ng-container formGroupName="compteGroup">
+    <div class="form-group">
+      <label for="login">login:</label>
+      <input id="login" class="form-control" formControlName="login" />
+    </div>
+    <ng-container formGroupName="passwordGrp">
+      <div class="form-group">
+        <label for="password">pasword:</label>
+        <input id="password" class="form-control" formControlName="password" />
+      </div>
+      <div class="form-group">
+        <label for="confirm">confirmation mot de passe:</label>
+        <input id="confirm" class="form-control" formControlName="confirm" />
+      </div>
+    </ng-container>
+  </ng-container>
+  <div>
+    <button
+      type="submit"
+      class="btn btn-outline-primary"
+      [disabled]="form.invalid"
+    >
+      enregistrer
+    </button>
+    <a routerLink="/home" routerLinkActive="active" class="btn btn-link"
+      >annuler</a
+    >
+  </div>
+</form>
