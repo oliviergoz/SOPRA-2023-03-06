@@ -16,6 +16,7 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { AdminGuardService } from './services/admin-guard.service';
 import { UserGuardService } from './services/user-guard.service';
 import { FormulaireComponent } from './components/formulaire/formulaire.component';
+import { InscriptionComponent } from './components/inscription/inscription.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -60,6 +61,7 @@ const routes: Routes = [
     canActivate: [AdminGuardService],
   },
   { path: 'formulaire', component: FormulaireComponent },
+  { path: 'inscription', component: InscriptionComponent },
   {
     path: 'client/:id',
     component: EditClientComponent,

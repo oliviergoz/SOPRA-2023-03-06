@@ -19,6 +19,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { FormulaireComponent } from './components/formulaire/formulaire.component';
+import { InscriptionComponent } from './components/inscription/inscription.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { FormulaireComponent } from './components/formulaire/formulaire.componen
     NotFoundComponent,
     LinkComponent,
     FormulaireComponent,
+    InscriptionComponent,
   ],
   imports: [
     BrowserModule,

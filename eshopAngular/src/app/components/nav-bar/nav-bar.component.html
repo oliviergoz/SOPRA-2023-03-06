@@ -9,7 +9,7 @@
     <app-link etiquetteLien="commander" lien="/achat"></app-link>
   </ng-container>
   <ng-container *ngIf="!logged">
-    <app-link etiquetteLien="inscription" lien="/formulaire"></app-link>
+    <app-link etiquetteLien="inscription" lien="/inscription"></app-link>
     <app-link etiquetteLien="connexion" lien="/login"></app-link>
   </ng-container>
   <button *ngIf="logged" class="btn btn-link" (click)="logout()">
