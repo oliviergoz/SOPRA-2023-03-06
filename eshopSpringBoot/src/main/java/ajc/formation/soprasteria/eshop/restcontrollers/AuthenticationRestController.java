@@ -21,4 +21,5 @@ public class AuthenticationRestController {
 	public Compte authentication(@AuthenticationPrincipal Compte compte){
 		return compte;
 	}
+	
 }

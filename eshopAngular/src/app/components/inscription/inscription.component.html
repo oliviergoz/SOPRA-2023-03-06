@@ -36,6 +36,13 @@
     <div class="form-group">
       <label for="login">login:</label>
       <input id="login" class="form-control" formControlName="login" />
+      <span
+        *ngIf="
+          form.get('compteGroup.login')?.dirty &&
+          form.get('compteGroup.login')?.hasError('loginExist')
+        "
+        >login exist</span
+      >
     </div>
     <ng-container formGroupName="passwordGrp">
       <div class="form-group">

@@ -32,7 +32,7 @@ public class ClientService {
 	public Client create(Client client) {
 		Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 		Set<ConstraintViolation<Client>> violations = validator.validate(client);
-		if (violations.isEmpty()) {
+		if (violations.isEmpty() && !compteSrv.loginExist(client.getCompte().getLogin())) {
 			compteSrv.createUser(client.getCompte());
 			return clientRepository.save(client);
 		} else {

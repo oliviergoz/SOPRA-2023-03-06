@@ -21,6 +21,7 @@ public class ApiSecurityConfig {
 				.and()
 				.authorizeRequests()
 					.antMatchers(HttpMethod.OPTIONS).permitAll()
+					.antMatchers(HttpMethod.GET, "/api/compte/login/check/**").permitAll()
 					.antMatchers(HttpMethod.POST,"/api/client/inscription").anonymous()
 					.antMatchers(HttpMethod.POST, "/api/commande").hasAnyRole("USER")
 					.antMatchers(HttpMethod.GET).authenticated()

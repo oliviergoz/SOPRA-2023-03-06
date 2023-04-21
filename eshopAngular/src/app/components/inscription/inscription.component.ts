@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
+  AsyncValidatorFn,
   FormControl,
   FormGroup,
   ValidationErrors,
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable, map } from 'rxjs';
 import { Civilite } from 'src/app/model/civilite';
 import { UtilisateurService } from 'src/app/services/utilisateur.service';
 
@@ -32,7 +34,11 @@ export class InscriptionComponent implements OnInit {
       ville: new FormControl(),
       compteGroup: new FormGroup(
         {
-          login: new FormControl('', Validators.required),
+          login: new FormControl(
+            '',
+            Validators.required,
+            this.loginFree(this.clientSrv)
+          ),
           passwordGrp: new FormGroup(
             {
               password: new FormControl(
@@ -47,6 +53,17 @@ export class InscriptionComponent implements OnInit {
         this.loginAndPasswordNotEquals
       ),
     });
+  }
+
+  loginFree(srv: UtilisateurService): AsyncValidatorFn {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      console.debug('check');
+      return this.clientSrv.checkLogin(control.value).pipe(
+        map((exist: boolean) => {
+          return exist ? { loginExist: true } : null;
+        })
+      );
+    };
   }
 
   passwordAndConfirmEquals(control: AbstractControl): ValidationErrors | null {

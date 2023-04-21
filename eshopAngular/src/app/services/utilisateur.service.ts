@@ -12,4 +12,10 @@ export class UtilisateurService {
   public inscription(client: any): Observable<any> {
     return this.http.post(clientRest + '/inscription', client);
   }
+
+  public checkLogin(login: string): Observable<boolean> {
+    return this.http.get<boolean>(
+      'http://localhost:8080/eshop/api/compte/login/check/' + login
+    );
+  }
 }

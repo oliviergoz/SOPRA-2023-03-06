@@ -44,4 +44,8 @@ public class CompteService {
 			throw new CompteException();
 		});
 	}
+	
+	public boolean loginExist(String login) {
+		return compteRepo.findByLogin(login).isPresent();
+	}
 }
